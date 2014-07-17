@@ -35,6 +35,9 @@ a:focus {
   text-decoration: none;
   color: #72afd2;
 }
+.half-width{
+  width: 50%;
+}
 .customs select {
 display: inline-block;
 padding: 4px 3px 3px 5px;
