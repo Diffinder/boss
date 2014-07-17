@@ -38,6 +38,12 @@ a:focus {
 .half-width{
   width: 50%;
 }
+
+.ui-widget{
+    font-family: "Source Sans Pro", Helvetica,sans-serif  !important;
+  -webkit-font-smoothing: antialiased;
+  background: #f9f9f9;
+}
 .customs select {
 display: inline-block;
 padding: 4px 3px 3px 5px;
@@ -1091,6 +1097,7 @@ body > .header .logo .icon {
 .checkbox,
 .radio {
   padding-left: 0;
+  margin-left: 25px;
 }
 /* 
     Compenent: Progress bars

@@ -128,7 +128,23 @@ body {
   -ms-filter: blur(0px);
   filter: blur(0px);
 }
-
+.contents:before{
+  content:"";
+    display:block;
+  height: 100%;
+  width: 100%;
+  position:absolute;
+  z-index: -1;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -o-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+}
 .content {
    z-index: 0;
   display: table;
@@ -159,6 +175,39 @@ text-shadow: -1px -1px 1px #fff, 1px 1px 1px #F1E7E7;
 }
 
 .content a{
+  margin-left: 58px;
+}
+
+.contents {
+   z-index: 0;
+  display: table;
+  height: 100%;
+  width: 100%;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
+.contents h1{
+    color: rgb(1, 35, 66);
+text-shadow: -1px -1px 1px #fff, 1px 1px 1px #F1E7E7;
+margin-left: 70px;
+ -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -o-filter: blur(0px);
+  -ms-filter: blur(0px);
+  filter: blur(0px);
+}
+
+.contents h3{
+  margin-left: 74px;
+margin-top: 1px;
+text-shadow: -1px -1px 1px #fff, 1px 1px 1px #F1E7E7;
+}
+
+.contents a{
   margin-left: 58px;
 }
 

@@ -13,8 +13,8 @@
         <!-- DATA TABLES -->
         <link href="../../styles/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
-            <link href="../../styles/css/stylish-portfolio.css" rel="stylesheet">
         <link href="../../styles/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+            <link rel="stylesheet" href="../../styles/css/jQueryUI/jquery-ui.css">
     </head>
     <body class="skin-blue" style="overflow:hidden">
         <!-- header logo: style can be found in header.less -->
@@ -169,41 +169,17 @@
                                             <input type="text" class="form-control half-width" name="username" id="exampleInputPassword1" placeholder="Please enter your full name">
                                         </div>
                                         <div class="form-group">
-                                            <label>Bike Model<!--Added--><span class="error" id="bk">*</span></label>
-                                            <select class="form-control half-width" name="bike" >
-                                                <option selected="true">--Select--</option>
-                                                <option>KARIZMA ZMR</option>
-                                                <option>KARIZMA</option>
-                                                <option>XTREME</option>
-                                                <option>HUNK</option>
-                                                <option>IMPULSE</option>
-                                                <option>ACHIEVER</option>
-                                                <option>IGNITOR</option>
-                                                <option>GLAMOUR PROGRAMMED FI</option>
-                                                <option>GLAMOUR</option>
-                                                <option>SUPER SPLENDOR</option>
-                                                <option>MAESTRO</option>
-                                                <option>PLEASURE</option>
-                                                <option>PASSION XPRO</option>
-                                                <option>PASSION PRO</option>
-                                                <option>SPLENDOR ISMART</option>
-                                                <option>SPLENDOR PRO(BLACK ALLOYS)</option>
-                                                <option>SPLENDOR PRO</option>
-                                                <option>SPLENDOR NXG</option>
-                                                <option>SPLENDOR +</option>
-                                                <option>HF DELUXE ECO</option>
-                                                <option>HF DELUXE</option>
-                                                <option>HF DAWN</option>
-                                            </select>
+                                            <label for="exampleInputPassword1">Bike Model<span class="error" id="ph">*</span></label>
+                                            <input type="text" class="form-control half-width auto" name="phNum" id="tags" placeholder="Start typing your bike model, eg. Avenger" >
                                         </div>
                                          <div class="form-group"> 
                                          <label style="float:left;">Service Type :</label>
-                                            <div class="radio" style="float:left;margin-top: -1px;margin-left: 10px;">
+                                            <div class="radio" style="float:left;margin-top: -1px;margin-left: 30px;">
                                                 <label>
                                                     <input type="radio" name="serType" id="optionsRadios1" value="Free">Free
                                                 </label>
                                             </div>
-                                            <div class="radio" style="float: left;margin-left: 10px;margin-top: 0.25px;">
+                                            <div class="radio" style="float: left;margin-left: 30px;margin-top: 0.25px;">
                                                 <label>
                                                     <input type="radio" name="serType" id="optionsRadios2" value="Paid" checked>
                                                     Paid
@@ -272,7 +248,12 @@
                                         </tfoot>
                                     </table>
                                 </div><!-- /.box-body -->
+                                <div class="box-footer">
+                                        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
                             </div><!-- /.box -->
+
                         </div>
                     </div>
 
@@ -282,7 +263,7 @@
 
 
         <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+       <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script> -->
         <!-- Bootstrap -->
         <script src="../../script/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- DATA TABES SCRIPT -->
@@ -306,73 +287,38 @@
                 });
             });
         </script>
-<script type="text/javascript">
-
-if(typeof(EventSource) !== "undefined") {
-    var source = new EventSource("http://rakeshvaddadi.com/hero/docs/profile/notif_sse.php");
-    
-    source.onmessage = function(event) {
-      
-        document.getElementById("notiff").innerHTML = "You have "+ event.data + " notifications<br>";
-    };
-} else {
-    document.getElementById("notiff").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
-
-<script type="text/javascript">
-
-if(typeof(EventSource) !== "undefined") {
-    var source = new EventSource("http://rakeshvaddadi.com/hero/docs/profile/notiffIcon.php");
-    
-    source.onmessage = function(event) {
-      
-        document.getElementById("notiffIcon").innerHTML = event.data;
-    };
-} else {
-    document.getElementById("notiffIcon").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
-
-<script type="text/javascript">
-
-if(typeof(EventSource) !== "undefined") {
-    var source = new EventSource("http://rakeshvaddadi.com/hero/docs/profile/notiflist_sse.php");
-    
-    source.onmessage = function(event) {
-      
-        document.getElementById("notifli").innerHTML =  event.data ;
-    };
-} else {
-    document.getElementById("notifli").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
-<script type="text/javascript">
-
-if(typeof(EventSource) !== "undefined") {
-    var source = new EventSource("http://rakeshvaddadi.com/hero/docs/profile/notiflist_feed.php");
-    
-    source.onmessage = function(event) {
-      
-        document.getElementById("feedli").innerHTML =  event.data ;
-    };
-} else {
-    document.getElementById("feedli").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
-<script type="text/javascript">
-
-if(typeof(EventSource) !== "undefined") {
-    var source = new EventSource("http://rakeshvaddadi.com/hero/docs/profile/notif_feed.php");
-    
-    source.onmessage = function(event) {
-      
-        document.getElementById("feednoti").innerHTML = "You have "+ event.data + " notifications<br>";
-        document.getElementById("feednum").innerHTML =  event.data ;
-    };
-} else {
-    document.getElementById("notiff").innerHTML = "Sorry, your browser does not support server-sent events...";
-}
-</script>
+ <script src="../../script/js/jquery-1.10.2.js"></script>
+  <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
+    <script>
+  $(function() {
+    var availableTags = [
+    "KARIZMA ZMR",
+                                                "KARIZMA",
+                                                "XTREME",
+                                                "HUNK",
+                                                "IMPULSE",
+                                                "ACHIEVER",
+                                                "IGNITOR",
+                                                "GLAMOUR PROGRAMMED FI",
+                                                "GLAMOUR",
+                                                "SUPER SPLENDOR",
+                                                "MAESTRO",
+                                                "PLEASURE",
+                                                "PASSION XPRO",
+                                                "PASSION PRO",
+                                                "SPLENDOR ISMART",
+                                                "SPLENDOR PRO(BLACK ALLOYS)",
+                                                "SPLENDOR PRO",
+                                                "SPLENDOR NXG",
+                                                "SPLENDOR +",
+                                                "HF DELUXE ECO",
+                                                "HF DELUXE",
+                                                "HF DAWN"
+    ];
+    $( "#tags" ).autocomplete({
+      source: availableTags
+    });
+  });
+  </script>
     </body>
 </html>
