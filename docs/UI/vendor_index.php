@@ -1,4 +1,4 @@
-<?php require_once("includes/connection.php"); ?>
+<?php require_once("../../includes/db/connection.php"); ?>
 
 <!DOCTYPE html>
 <html>
