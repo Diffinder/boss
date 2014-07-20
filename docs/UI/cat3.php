@@ -161,8 +161,22 @@
                                 <div class="box-header">
                                     <h3 class="box-title">Customer Order Details</h3>                                    
                                 </div><!-- /.box-header -->
-                                <div class="box-body table-responsive">
-                                 <div class="checkbox" style="margin-left:0px">
+                                <div class="form-group" style="margin-left:15px"> 
+                                         <label >Service Type :</label>
+                                            <select style="margin-left:10px"class="target" id="ser">
+                                                <option value="option1" selected="selected">Normal</option>
+                                                <option value="option2">Emergency</option>
+                                              </select>
+                                        </div>
+                                         <div style="clear:both;font-style:italic;color:#a7a7a7;margin-left:15px" >#Select Emergency service ,only if it is an onroad repair!!
+                                        </div>
+                                        <div style="clear:both;font-style:italic;color:rgb(143, 63, 63);;display:none;margin-left:15px" id="emerNote" >#Emergency service is available only from 9am to 9pm!!
+                                        </div>
+                                <div class="box-body table-responsive" id="shwRumTable">
+                                
+                                        
+                                          
+                                        <div class="checkbox" style="margin-left:0px">
                                             <label>
                                                 <input type="checkbox" name="pickUp" checked="true">Show only NearBy Service-Centres
                                             </label>
@@ -175,25 +189,28 @@
                                                 <th>Rating</th>
                                                 <th>Address</th>
                                                 <th>Amenities</th>
-                                                <th>Price</th>
+                                                <th>Service Price</th>
+                                                <th>PickUp Charges</th>
                                             </tr>
                                         </thead>
                                         <tbody id="det_tab">
                                         <tr>
-                                               <th><input type="radio" name="serType" id="optionsRadios1" value="Free"></th>
+                                               <th><input type="radio" name="serType" id="" value="Free"></th>
                                                 <th>Rishi Hero</th>
                                                 <th>Good</th>
-                                                <th>Thubarahalli,Whitefield</th>
+                                                <th>Thubarahalli, Whitefield, sasdasdasdasdasdasd, asdasdasdasd, asdassdasdasdasdasdasdasdasd</th>
                                                 <th>Free PickUp, GoodLife Membership</th>
                                                 <th>1500 INR</th>
+                                                <th>50 INR</th>
                                             </tr>
                                              <tr>
-                                               <th><input type="radio" name="serType" id="optionsRadios1" value="Free"></th>
+                                               <th><input type="radio" name="serType" id="" value="Free"></th>
                                                 <th>Kaveri Motors</th>
                                                 <th>Good</th>
                                                 <th>Marathahalli,Whitefield</th>
                                                 <th>Free WaterWash for Next Service</th>
                                                 <th>1700 INR</th>
+                                                <th>70 INR</th>
                                             </tr>
                                             
                                         </tbody>
@@ -204,8 +221,8 @@
                                                 <th>Rating</th>
                                                 <th>Address</th>
                                                 <th>Amenities</th>
-                                                <th>Price</th>
-                                             </tr>
+                                                <th>Service Price</th>
+                                                <th>PickUp Charges</th>                                             </tr>
                                         </tfoot>
                                     </table>
                                 </div><!-- /.box-body -->
@@ -218,32 +235,59 @@
                                             <label for="exampleInputPassword1">Bike Model<span class="error" id="ph">*</span></label>
                                             <input type="text" class="form-control half-width auto" name="phNum" id="tags" placeholder="Start typing your bike model, eg. Avenger" >
                                         </div>
-                                         <div class="form-group"> 
-                                         <label style="float:left;">Service Type :</label>
-                                            <select style="margin-left:10px"class="target">
-                                                <option value="option1" selected="selected">Free</option>
-                                                <option value="option2">paid</option>
+
+                                        <div class="form-group" > 
+                                         <label style="float:left;">Tyre Type&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :</label>
+                                            <select style="margin-left:10px"class="target_">
+                                                <option value="option1" selected="selected">Front Tyre</option>
+                                                <option value="option2">Back</option>
                                               </select>
                                         </div>
-                                        <div style="clear:both;font-style:italic;color:#a7a7a7;" >#Select Free service ,only if your bike is new and eligible for free service !!
-                                        </div>
-                                          <div class="form-group" style="clear:both;">
-                                            <label for="exampleInputPassword1">Request In-Brief</label>
-                                            <input type="text" class="form-control half-width" id="exampleInputPassword1" name="reqDetail" placeholder="Brief your Request">
-                                        </div>
-                                       <div class="form_elem">
+                                         
+                                        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+                                              <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
+                                            <script type="text/javascript">
+                                            var flag=1;
+                                                      $( ".target" ).change(function() {
+                                                        if(flag)
+                                                        {
+                                                            document.getElementById('shwRumTable').style.display="none";
+                                                            document.getElementById('date').style.display="none";
+                                                            document.getElementById('addInfo').style.display="none";
+                                                            document.getElementById('homePick').style.display="none";
+                                                            document.getElementById('emerNote').style.display="block";
+                                                            flag=0;
+                                                        }
+                                                      else
+                                                      {
+                                                            document.getElementById('shwRumTable').style.display="block";
+                                                            document.getElementById('date').style.display="block";
+                                                            document.getElementById('addInfo').style.display="block";
+                                                            document.getElementById('homePick').style.display="block";
+                                                            document.getElementById('emerNote').style.display="none";
+
+                                                            flag=1;
+                                                      }
+                                                    });
+                                            </script>
+                                     
+                                          
+                                       <div class="form_elem"  id="date">
                                         <label>Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
                                         <input type="datetime-local" class="form-control half-width" name="dd" placeholder="27/07/2014" ></br>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group"   id="addInfo" >
                                             <label for="exampleInputPassword1">Additional Info</label>
                                             <input type="text" class="form-control half-width" name="addInfo" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
                                         </div>
-                                        <div class="checkbox" style="margin-left:0px">
+                                        <div class="checkbox" style="margin-left:0px" id="homePick">
                                             <label>
                                                 <input type="checkbox" name="pickUp"> Need Home Pick-Up
                                             </label>
                                         </div>
+                                         <div class="box-footer">
+                                        <button type="submit" name="submit" class="btn btn-primary">Submit Query</button>
+                                    </div>
                                     </div><!-- /.box-body -->
 
                             </div><!-- /.box -->
@@ -306,7 +350,8 @@
             $( "#tags" ).autocomplete({
               source: availableTags
             });
-            });
+           
+        });
         </script>
     </body>
 </html>

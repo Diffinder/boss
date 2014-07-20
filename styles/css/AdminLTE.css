@@ -38,7 +38,10 @@ a:focus {
 .half-width{
   width: 50%;
 }
-
+  .error {
+    color: #FF0000;
+    margin-left: 5px;
+  }
 .ui-widget{
     font-family: "Source Sans Pro", Helvetica,sans-serif  !important;
   -webkit-font-smoothing: antialiased;
