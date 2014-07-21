@@ -35,6 +35,9 @@ a:focus {
   text-decoration: none;
   color: #72afd2;
 }
+.dataTables_paginate{
+  float: right;
+}
 .dataTables_filter{
   float: right;
 }

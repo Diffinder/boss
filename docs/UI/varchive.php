@@ -169,33 +169,34 @@
                         </li>
                         <li >
                             <a href="vnext.php">
-                                <i class="fa fa-th"></i> <span>Upcoming</span> <small class="badge pull-right bg-green">10</small>
+                                <i class="fa fa-calendar"></i> <span>Upcoming</span> <small class="badge pull-right bg-green">10</small>
                             </a>
                         </li>
                         <li>
                             <a href="vallot.php">
-                                <i class="fa fa-calendar"></i> <span>Allotted</span>
-                                <small class="badge pull-right bg-red">3</small>
+                                <i class="fa fa-cogs"></i> <span>Allotted</span>
+                                <small class="badge pull-right bg-blue">3</small>
                             </a>
                         </li>
                         <li>
                             <a href="vservcd.php">
-                                <i class="fa fa-envelope"></i> <span>Serviced</span>
+                                <i class="fa fa-check-square"></i> <span>Serviced</span>
                                 <small class="badge pull-right bg-yellow">12</small>
                             </a>
                         </li>
+
                         <li>
                             <a href="vquery.php">
-                                <i class="fa fa-envelope"></i> <span>Queried</span>
-                                <small class="badge pull-right bg-yellow">12</small>
+                                <i class="fa fa-flag"></i> <span>Queried</span>
+                                <small class="badge pull-right bg-red">12</small>
                             </a>
                         </li>
-                        <li class="treeview" class="active">
+                        <li class="treeview active">
                             <a href="#">
                                 <i class="fa fa-folder"></i> <span>Others</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
-                            <ul class="treeview-menu">
+                            <ul class="treeview-menu ">
                                 <li><a href="varchive.php"><i class="fa fa-angle-double-right"></i> History</a></li>
                                 <li><a href="vprofile.php"><i class="fa fa-angle-double-right"></i>Edit Profile</a></li>
                                 <li><a href="vfeed.php"><i class="fa fa-angle-double-right"></i>Feedback</a></li>
@@ -211,8 +212,8 @@
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Dashboard
-                        <small>Overview & Analysis</small>
+                        History
+                        <small>History of all the orders</small>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
