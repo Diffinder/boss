@@ -12,15 +12,140 @@
         <link href="../../styles/css/ionicons.min.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
         <link href="../../styles/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+        <style type="text/css">
+${demo.css}
+        </style>
+        <script type="text/javascript">
+$(function () {
+        $('#container11').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Customer Order Statistic Report for Next 6 days'
+            },
+            subtitle: {
+                text: 'Source: Spring Street'
+            },
+            xAxis: {
+                categories: ['21/07', '22/07', '23/07', '24/07', '25/07' ,'26/07'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Orders (Scaled)',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'Orders'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'UnAllotted',
+                data: [107, 31, 635, 203, 2,35]
+            }, {
+                name: 'Upcoming',
+                data: [133, 156, 947, 408, 6,123]
+            }, {
+                name: 'Allotted',
+                data: [973, 914, 405, 732, 34,1234]
+            }]
+        });
+            $(".knob").knob({
+                    /*change : function (value) {
+                     //console.log("change : " + value);
+                     },
+                     release : function (value) {
+                     console.log("release : " + value);
+                     },
+                     cancel : function () {
+                     console.log("cancel : " + this.value);
+                     },*/
+                    draw: function() {
 
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-          <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
+                        // "tron" case
+                        if (this.$.data('skin') == 'tron') {
+
+                            var a = this.angle(this.cv)  // Angle
+                                    , sa = this.startAngle          // Previous start angle
+                                    , sat = this.startAngle         // Start angle
+                                    , ea                            // Previous end angle
+                                    , eat = sat + a                 // End angle
+                                    , r = true;
+
+                            this.g.lineWidth = this.lineWidth;
+
+                            this.o.cursor
+                                    && (sat = eat - 0.3)
+                                    && (eat = eat + 0.3);
+
+                            if (this.o.displayPrevious) {
+                                ea = this.startAngle + this.angle(this.value);
+                                this.o.cursor
+                                        && (sa = ea - 0.3)
+                                        && (ea = ea + 0.3);
+                                this.g.beginPath();
+                                this.g.strokeStyle = this.previousColor;
+                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
+                                this.g.stroke();
+                            }
+
+                            this.g.beginPath();
+                            this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
+                            this.g.stroke();
+
+                            this.g.lineWidth = 2;
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.o.fgColor;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                            this.g.stroke();
+
+                            return false;
+                        }
+                    }
+                });
+                /* END JQUERY KNOB */
+
+                //INITIALIZE SPARKLINE CHARTS
+                $(".sparkline").each(function() {
+                    var $this = $(this);
+                    $this.sparkline('html', $this.data());
+                });
+    });
+    
+
+        </script>
     </head>
-    <body class="skin-blue">
+<body class="skin-blue">
         <!-- header logo: style can be found in header.less -->
         <header class="header">
             <a href="../../index.php" target="_blank" class="logo">
@@ -184,6 +309,12 @@
                                 <small class="badge pull-right bg-yellow">12</small>
                             </a>
                         </li>
+                        <li>
+                            <a href="vquery.php">
+                                <i class="fa fa-envelope"></i> <span>Queried</span>
+                                <small class="badge pull-right bg-yellow">12</small>
+                            </a>
+                        </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-folder"></i> <span>Others</span>
@@ -213,50 +344,72 @@
                         <li class="active">Dashboard</li>
                     </ol>
                 </section>
-
+                
+                
                 <!-- Main content -->
                 <section class="content">
 
-                    <!-- row -->
-                    <div class="row">
-                     <div class="col-md-4" style="margin-left:150px;">
+                        
+                            <!-- jQuery Knob -->
+                            <div class='callout callout-info'>
+                        <h4>Today's Orders Summary</h4>
+                        <p>The following graphs and ring charts provide you complete details of today's orders.</p>
+                        </div>
+                               <div class="row">
+
+                     <div class="col-md-4" style="">
                             <div class="box box-solid">
                                 <div class="box-header">
-                                    <h3 class="box-title text-warning">Sparkline Bar</h3>
+                                    <h3 class="box-title text-warning">Today's Orders</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body text-center">
-                                    <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="14" data-bar-Spacing="7" data-bar-Color="#f39c12">
-                                        6,4,8, 9, 10, 5, 13, 18, 21, 7, 9
+                                    <div class="sparkline" data-type="bar" data-width="100%" data-height="100px" data-bar-Width="44" data-bar-Spacing="10" data-bar-Color="#f39c12">
+                                        40,38,38,44,39
                                     </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </div><!-- /.col -->
-                         <div class="col-md-4"  style="margin-left:80px;">
+                        <div class="col-md-4" style="">
                             <div class="box box-solid">
                                 <div class="box-header">
-                                    <h3 class="box-title text-danger">Sparkline Pie</h3>
+                                    <h3 class="box-title text-warning">Day&nbsp; v/s Overnight</h3>
+                                    <div class="box-tools pull-right">
+                                        <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                                    </div>
+                                </div><!-- /.box-header -->
+                                <div class="box-body text-center">
+                                    <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="44" data-bar-Spacing="7" data-bar-Color="#f39c12">
+                                        10,6
+                                    </div>
+                                </div><!-- /.box-body -->
+                            </div><!-- /.box -->
+                        </div><!-- /.col -->
+                         <div class="col-md-4"  style="">
+                            <div class="box box-solid">
+                                <div class="box-header">
+                                    <h3 class="box-title text-danger">PickUp Ratio</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body text-center">
                                     <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
-                                        6,4,8
+                                        6,4
                                     </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </div><!-- /.col -->
-
+                        
                         <div class="col-xs-12">
                             <!-- jQuery Knob -->
 
                             <div class="box box-solid">
                                 <div class="box-header">
                                     <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">jQuery Knob</h3>
+                                    <h3 class="box-title">Order Split Details - Today</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-default btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-default btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -265,20 +418,20 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="43" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
+                                            <div class="knob-label">Periodic Servicing</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="32" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
+                                            <div class="knob-label">Water Wash</div>
                                         </div><!-- ./col -->
                                        <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="54" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
+                                            <div class="knob-label">Repair/Accidental</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="14" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
+                                            <div class="knob-label">Insurance Renewal</div>
                                         </div><!-- ./col -->
 
                                     </div><!-- /.row -->
@@ -288,13 +441,29 @@
                             </div><!-- /.box -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-
+                    <script src="../../script/js/plugins/js/highcharts.js"></script>
+                        <script src="../../script/js/plugins/js/modules/exporting.js"></script>
+                        <div class='callout callout-info'>
+                        <h4>Comparison of Orders in the coming week</h4>
+                        <p>The following bar graph helps you to compare order load in the next 6 days.</p>
+                        </div>
+                    <div class="row">
+                     <div class="col-xs-12" style="">
+                            <div class="box box-solid">
+                    <div id="container11" style="min-width: 310px; max-width: 800px; height: 400px; margin: 0 auto"></div>
+                    </div>
+                    </div>
+                    </div>
+                    <div class='callout callout-info'>
+                        <h4>Overview of Orders in the coming week</h4>
+                        <p>The following six ring charts helps you to interpret order load in the next 6 days.</p>
+                    </div>
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="box box-solid">
                                 <div class="box-header">
                                     <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">jQuery Knob Tron Style</h3>
+                                    <h3 class="box-title">Total Orders - Next 6 Days</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-default btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-default btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -304,271 +473,50 @@
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
                                             <input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgColor="#3c8dbc"/>
-                                            <div class="knob-label">New Visitors</div>
+                                            <div class="knob-label">21/07</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
                                             <input type="text" class="knob" value="70" data-width="90" data-height="90" data-fgColor="#f56954"/>
-                                            <div class="knob-label">Bounce Rate</div>
+                                            <div class="knob-label">22/07</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="-80" data-min="-150" data-max="150" data-width="90" data-height="90" data-fgColor="#00a65a"/>
-                                            <div class="knob-label">Server Load</div>
+                                            <input type="text" class="knob" value="80"  data-width="90" data-height="90" data-fgColor="#00a65a"/>
+                                            <div class="knob-label">23/07</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
                                             <input type="text" class="knob" value="40" data-width="90" data-height="90" data-fgColor="#00c0ef"/>
-                                            <div class="knob-label">Disk Space</div>
+                                            <div class="knob-label">24/07</div>
                                         </div><!-- ./col -->
                                     </div><!-- /.row -->
 
                                     <div class="row">
                                         <div class="col-xs-6 text-center">
                                             <input type="text" class="knob" value="90" data-width="90" data-height="90" data-fgColor="#932ab6"/>
-                                            <div class="knob-label">Bandwidth</div>
+                                            <div class="knob-label">25/07</div>
                                         </div><!-- ./col -->
                                         <div class="col-xs-6 text-center">
                                             <input type="text" class="knob" value="50" data-width="90" data-height="90" data-fgColor="#39CCCC"/>
-                                            <div class="knob-label">CPU</div>
+                                            <div class="knob-label">26/07</div>
                                         </div><!-- ./col -->
                                     </div><!-- /.row -->
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </div><!-- /.col -->
                     </div><!-- /.row -->
-
-                    <!-- callout -->
-                    <div class='callout callout-info'>
-                        <h4>The following was created using data tags</h4>
-                        <p>The following three inline (sparkline) chart have been initialized to read and interpret data tags</p>
-                    </div>
-                    <!-- /.callout -->
+                           
 
 
                 </section><!-- /.content -->
             </aside><!-- /.right-side -->
         </div><!-- ./wrapper -->
-
-
-        <!-- jQuery 2.0.2 -->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <!-- Bootstrap -->
         <script src="../../script/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- AdminLTE App -->
-        <script src="../../script/js/AdminLTE/app.js" type="text/javascript"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="../../script/js/AdminLTE/demo.js" type="text/javascript"></script>
         <!-- jQuery Knob -->
         <script src="../../script/js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>
         <!-- Sparkline -->
         <script src="../../script/js/plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
-
-        <!-- page script -->
-        <script type="text/javascript">
-            $(function() {
-                /* jQueryKnob */
-
-                $(".knob").knob({
-                    /*change : function (value) {
-                     //console.log("change : " + value);
-                     },
-                     release : function (value) {
-                     console.log("release : " + value);
-                     },
-                     cancel : function () {
-                     console.log("cancel : " + this.value);
-                     },*/
-                    draw: function() {
-
-                        // "tron" case
-                        if (this.$.data('skin') == 'tron') {
-
-                            var a = this.angle(this.cv)  // Angle
-                                    , sa = this.startAngle          // Previous start angle
-                                    , sat = this.startAngle         // Start angle
-                                    , ea                            // Previous end angle
-                                    , eat = sat + a                 // End angle
-                                    , r = true;
-
-                            this.g.lineWidth = this.lineWidth;
-
-                            this.o.cursor
-                                    && (sat = eat - 0.3)
-                                    && (eat = eat + 0.3);
-
-                            if (this.o.displayPrevious) {
-                                ea = this.startAngle + this.angle(this.value);
-                                this.o.cursor
-                                        && (sa = ea - 0.3)
-                                        && (ea = ea + 0.3);
-                                this.g.beginPath();
-                                this.g.strokeStyle = this.previousColor;
-                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sa, ea, false);
-                                this.g.stroke();
-                            }
-
-                            this.g.beginPath();
-                            this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
-                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, sat, eat, false);
-                            this.g.stroke();
-
-                            this.g.lineWidth = 2;
-                            this.g.beginPath();
-                            this.g.strokeStyle = this.o.fgColor;
-                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
-                            this.g.stroke();
-
-                            return false;
-                        }
-                    }
-                });
-                /* END JQUERY KNOB */
-
-                //INITIALIZE SPARKLINE CHARTS
-                $(".sparkline").each(function() {
-                    var $this = $(this);
-                    $this.sparkline('html', $this.data());
-                });
-
-                /* SPARKLINE DOCUMENTAION EXAMPLES http://omnipotent.net/jquery.sparkline/#s-about */
-                drawDocSparklines();
-                drawMouseSpeedDemo();
-
-            });
-            function drawDocSparklines() {
-
-                // Bar + line composite charts
-                $('#compositebar').sparkline('html', {type: 'bar', barColor: '#aaf'});
-                $('#compositebar').sparkline([4, 1, 5, 7, 9, 9, 8, 7, 6, 6, 4, 7, 8, 4, 3, 2, 2, 5, 6, 7],
-                        {composite: true, fillColor: false, lineColor: 'red'});
-
-
-                // Line charts taking their values from the tag
-                $('.sparkline-1').sparkline();
-
-                // Larger line charts for the docs
-                $('.largeline').sparkline('html',
-                        {type: 'line', height: '2.5em', width: '4em'});
-
-                // Customized line chart
-                $('#linecustom').sparkline('html',
-                        {height: '1.5em', width: '8em', lineColor: '#f00', fillColor: '#ffa',
-                            minSpotColor: false, maxSpotColor: false, spotColor: '#77f', spotRadius: 3});
-
-                // Bar charts using inline values
-                $('.sparkbar').sparkline('html', {type: 'bar'});
-
-                $('.barformat').sparkline([1, 3, 5, 3, 8], {
-                    type: 'bar',
-                    tooltipFormat: '{{value:levels}} - {{value}}',
-                    tooltipValueLookups: {
-                        levels: $.range_map({':2': 'Low', '3:6': 'Medium', '7:': 'High'})
-                    }
-                });
-
-                // Tri-state charts using inline values
-                $('.sparktristate').sparkline('html', {type: 'tristate'});
-                $('.sparktristatecols').sparkline('html',
-                        {type: 'tristate', colorMap: {'-2': '#fa7', '2': '#44f'}});
-
-                // Composite line charts, the second using values supplied via javascript
-                $('#compositeline').sparkline('html', {fillColor: false, changeRangeMin: 0, chartRangeMax: 10});
-                $('#compositeline').sparkline([4, 1, 5, 7, 9, 9, 8, 7, 6, 6, 4, 7, 8, 4, 3, 2, 2, 5, 6, 7],
-                        {composite: true, fillColor: false, lineColor: 'red', changeRangeMin: 0, chartRangeMax: 10});
-
-                // Line charts with normal range marker
-                $('#normalline').sparkline('html',
-                        {fillColor: false, normalRangeMin: -1, normalRangeMax: 8});
-                $('#normalExample').sparkline('html',
-                        {fillColor: false, normalRangeMin: 80, normalRangeMax: 95, normalRangeColor: '#4f4'});
-
-                // Discrete charts
-                $('.discrete1').sparkline('html',
-                        {type: 'discrete', lineColor: 'blue', xwidth: 18});
-                $('#discrete2').sparkline('html',
-                        {type: 'discrete', lineColor: 'blue', thresholdColor: 'red', thresholdValue: 4});
-
-                // Bullet charts
-                $('.sparkbullet').sparkline('html', {type: 'bullet'});
-
-                // Pie charts
-                $('.sparkpie').sparkline('html', {type: 'pie', height: '1.0em'});
-
-                // Box plots
-                $('.sparkboxplot').sparkline('html', {type: 'box'});
-                $('.sparkboxplotraw').sparkline([1, 3, 5, 8, 10, 15, 18],
-                        {type: 'box', raw: true, showOutliers: true, target: 6});
-
-                // Box plot with specific field order
-                $('.boxfieldorder').sparkline('html', {
-                    type: 'box',
-                    tooltipFormatFieldlist: ['med', 'lq', 'uq'],
-                    tooltipFormatFieldlistKey: 'field'
-                });
-
-                // click event demo sparkline
-                $('.clickdemo').sparkline();
-                $('.clickdemo').bind('sparklineClick', function(ev) {
-                    var sparkline = ev.sparklines[0],
-                            region = sparkline.getCurrentRegionFields();
-                    value = region.y;
-                    alert("Clicked on x=" + region.x + " y=" + region.y);
-                });
-
-                // mouseover event demo sparkline
-                $('.mouseoverdemo').sparkline();
-                $('.mouseoverdemo').bind('sparklineRegionChange', function(ev) {
-                    var sparkline = ev.sparklines[0],
-                            region = sparkline.getCurrentRegionFields();
-                    value = region.y;
-                    $('.mouseoverregion').text("x=" + region.x + " y=" + region.y);
-                }).bind('mouseleave', function() {
-                    $('.mouseoverregion').text('');
-                });
-            }
-
-            /**
-             ** Draw the little mouse speed animated graph
-             ** This just attaches a handler to the mousemove event to see
-             ** (roughly) how far the mouse has moved
-             ** and then updates the display a couple of times a second via
-             ** setTimeout()
-             **/
-            function drawMouseSpeedDemo() {
-                var mrefreshinterval = 500; // update display every 500ms
-                var lastmousex = -1;
-                var lastmousey = -1;
-                var lastmousetime;
-                var mousetravel = 0;
-                var mpoints = [];
-                var mpoints_max = 30;
-                $('html').mousemove(function(e) {
-                    var mousex = e.pageX;
-                    var mousey = e.pageY;
-                    if (lastmousex > -1) {
-                        mousetravel += Math.max(Math.abs(mousex - lastmousex), Math.abs(mousey - lastmousey));
-                    }
-                    lastmousex = mousex;
-                    lastmousey = mousey;
-                });
-                var mdraw = function() {
-                    var md = new Date();
-                    var timenow = md.getTime();
-                    if (lastmousetime && lastmousetime != timenow) {
-                        var pps = Math.round(mousetravel / (timenow - lastmousetime) * 1000);
-                        mpoints.push(pps);
-                        if (mpoints.length > mpoints_max)
-                            mpoints.splice(0, 1);
-                        mousetravel = 0;
-                        $('#mousespeed').sparkline(mpoints, {width: mpoints.length * 2, tooltipSuffix: ' pixels per second'});
-                    }
-                    lastmousetime = timenow;
-                    setTimeout(mdraw, mrefreshinterval);
-                }
-                // We could use setInterval instead, but I prefer to do it this way
-                setTimeout(mdraw, mrefreshinterval);
-            }
-
-
-        </script>
 
     </body>
 </html>

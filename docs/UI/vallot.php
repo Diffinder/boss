@@ -163,7 +163,7 @@
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
                         <li >
-                            <a href="#" >
+                            <a href="voview.php" >
                                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                             </a>
                         </li>
@@ -181,6 +181,12 @@
                         <li>
                             <a href="vservcd.php">
                                 <i class="fa fa-envelope"></i> <span>Serviced</span>
+                                <small class="badge pull-right bg-yellow">12</small>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="vquery.php">
+                                <i class="fa fa-envelope"></i> <span>Queried</span>
                                 <small class="badge pull-right bg-yellow">12</small>
                             </a>
                         </li>
