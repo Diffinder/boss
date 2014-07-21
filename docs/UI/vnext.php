@@ -231,7 +231,7 @@
                             <div class="box box-solid">
                                 <div class="box-header">
                                     <i class="fa fa-bar-chart-o"></i>
-                                    <h3 class="box-title">jQuery Knob</h3>
+                                    <h3 class="box-title">Order Split Details - Upcoming</h3>
                                     <div class="box-tools pull-right">
                                         <button class="btn btn-default btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
                                         <button class="btn btn-default btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -240,20 +240,20 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="43" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
+                                            <div class="knob-label">Periodic Servicing</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="32" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
+                                            <div class="knob-label">Water Wash</div>
                                         </div><!-- ./col -->
                                        <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="54" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
+                                            <div class="knob-label">Repair/Accidental</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="60" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
-                                            <div class="knob-label">data-width="120"</div>
+                                            <input type="text" class="knob" value="14" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
+                                            <div class="knob-label">Insurance Renewal</div>
                                         </div><!-- ./col -->
 
                                     </div><!-- /.row -->
