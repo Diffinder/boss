@@ -225,10 +225,7 @@
                                             <label for="exampleInputPassword1">Name<span class="error" id="usrn">*</span></label>
                                             <input type="text" class="form-control half-width" name="username" id="exampleInputPassword1" placeholder="Please enter your full name">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1">Bike Model<span class="error" id="ph">*</span></label>
-                                            <input type="text" class="form-control half-width auto" name="phNum" id="tags" placeholder="Start typing your bike model, eg. Avenger" >
-                                        </div>
+                                 
 
                                         
                                    
@@ -263,10 +260,7 @@
                                             <label for="exampleInputPassword1">Request In-Brief</label>
                                             <input type="text" class="form-control half-width" id="exampleInputPassword1" name="reqDetail" placeholder="Brief your Request">
                                         </div>
-                                       <div class="form_elem"    id="date"  >
-                                        <label>Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
-                                        <input type="datetime-local" class="form-control half-width" name="dd" placeholder="27/07/2014" ></br>
-                                        </div>
+                                    
                                         <div class="form-group" id="addInfo">
                                             <label for="exampleInputPassword1">Additional Info</label>
                                             <input type="text" class="form-control half-width" name="addInfo" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">

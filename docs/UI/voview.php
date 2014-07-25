@@ -80,15 +80,6 @@ $(function () {
             }]
         });
             $(".knob").knob({
-                    /*change : function (value) {
-                     //console.log("change : " + value);
-                     },
-                     release : function (value) {
-                     console.log("release : " + value);
-                     },
-                     cancel : function () {
-                     console.log("cancel : " + this.value);
-                     },*/
                     draw: function() {
 
                         // "tron" case
@@ -382,7 +373,7 @@ $(function () {
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body text-center">
-                                    <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="44" data-bar-Spacing="7" data-bar-Color="#f39c12">
+                                    <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="44" data-bar-Spacing="7" data-bar-Color="#00a65a">
                                         10,6
                                     </div>
                                 </div><!-- /.box-body -->
