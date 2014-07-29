@@ -16,9 +16,58 @@
     <link href="../../styles/css/AdminLTE.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../../styles/css/jQueryUI/jquery-ui.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
-
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
 </head>
 <body class="skin-blue" style="overflow:hidden">
+<script>
+
+function showMarker(lat,lon){
+      
+    var gMarker = null;
+    var center = null;
+    console.log(marker);
+    var Coba1center = new google.maps.LatLng(lat,lon);
+    var marker = new google.maps.Marker({
+    position:Coba1center,
+    });
+        gMarker = marker;
+        center = Coba1center;
+    
+
+    console.log(gMarker);
+    console.log(center);
+    google.maps.event.trigger(gMarker, 'click', {
+        latLng: center
+    });
+      var mapCenter = new google.maps.LatLng(lat,lon);
+var infowindow = null;
+
+var mapProp = {
+  center:mapCenter,
+  zoom:12,
+  mapTypeId:google.maps.MapTypeId.ROADMAP
+  };
+
+var map=new google.maps.Map(document.getElementById("googleMap")
+  ,mapProp);
+
+
+google.maps.event.addListener(marker,'click',function() {
+    map.setZoom(15);
+    map.setCenter(marker.getPosition());
+    if (infowindow) {
+        infowindow.close();
+    }
+    infowindow = new google.maps.InfoWindow();
+    infowindow.setContent("Coba1")
+    infowindow.open(map,marker);
+    });
+
+
+marker.setMap(map);
+}
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
     <!-- header logo: style can be found in header.less -->
     <header class="header">
         <a href="http://rishihero.heromotocorpdealers.com/HMC/Default.aspx/" target="_blank" class="logo">
@@ -188,7 +237,7 @@
                                     <th>Free PickUp, GoodLife Membership</th>
                                     <th>1500 INR</th>
                                     <th>
-                                        <button id="shwRum1_buk" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button>
+                                        <button id="shwRum1_-7.79793_ 110.36933" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button>
                                     </th>
                                 </tr>
                                 <tr>
@@ -197,7 +246,7 @@
                                  <th>Marathahalli,Whitefield</th>
                                  <th>Free WaterWash for Next Service</th>
                                  <th>1700 INR</th>
-                                 <th> <button id="shwRum2_buk" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button></th>
+                                 <th> <button id="shwRum2_-7.79793_ 110.36933" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button></th>
                              </tr>
 
                          </tbody>
@@ -213,53 +262,11 @@
                       </tfoot>
                   </table>
               </div><!-- /.box-body -->
+              <form action="cat1.php" method="POST">
               <div id="shwRum_buk_slots"  style="display:none;"  class="box">
-                  <div class="box-body" >
-                      <div  class="shwRum1_buk_slots" >You have selected <strong>ShowRoom1</strong></div>
-                      <div style="float:left;">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31105.995778347893!2d77.72184!3d12.955881999999985!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb41c26ffa4b3e311!2sRishi+Motors+Hero+Dealers+Bangalore!5e0!3m2!1sen!2sin!4v1404983321704" width="250" height="150" frameborder="0" style="border:0"></iframe>
-                    </div>
-                    <div class=" table-responsive no-padding" style="margin-left:3%;width:550px;float:left">
-                        <table class="table table-hover"><i><strong>Book Your Slot...</strong></i>
-                            <tr>
-                                <th><input type="radio">&nbsp;&nbsp;9am&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;10am&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;11am&nbsp;<span class="badge bg-green">4 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;12pm&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                            </tr>
-                            <tr>
-                                <th><input type="radio">&nbsp;&nbsp;1pm&nbsp;&nbsp;<span class="badge bg-red">2 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;2pm&nbsp;&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;3pm&nbsp;&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;4pm&nbsp;&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                            </tr>
-                            <tr>
-                                <th><input type="radio">&nbsp;&nbsp;5pm&nbsp;&nbsp;<span class="badge bg-green">9 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;6pm&nbsp;&nbsp;<span class="badge bg-green">5 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;7pm&nbsp;&nbsp;<span class="badge bg-green">4 Slots</span></th>
-                                <th><input type="radio">&nbsp;&nbsp;8pm&nbsp;&nbsp;<span class="badge bg-red">1 Slots</span></th>
-                            </tr>
-                        </table>
-                    </div><!-- /.box-body -->
-                    <div style="width:200px;float:right;">
-                        <!-- Info box -->
-                        <div class="box box-solid box-info">
-                            <div class="box-header">
-                                <h3 class="box-title" style="font-size:15px">Color Code</h3>
-                                <div class="box-tools pull-right">
-                                    <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                                    <button class="btn btn-info btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                                </div>
-                            </div>
-                            <div class="box-body"  style="float:left;">
-                                <p>
-                                    <span class="badge bg-grey">Grey&nbsp;</span> &nbsp;- Slots Empty</br>
-                                    <span class="badge bg-red">Red&nbsp;&nbsp;</span>&nbsp;&nbsp;&nbsp;- Few Slots</br>
-                                    <span class="badge bg-green">Green</span> -&nbsp;More Slots 
-                                </p>
-                            </div><!-- /.box-body -->
-                        </div><!-- /.box -->
-                    </div><!-- /.col -->
+                 <div class="box-body" >
+                         <div id="googleMap" style="float:left;width:250px;height:150px;"></div> 
+                        <div id="shwRum_buk_slots_"    class="box"></div>      
                 </div>
                 <div class="box-body" style="clear:both">
                     <div class="form-group">
@@ -291,7 +298,7 @@
                 <div class="box-footer">
                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                 </div>            </div><!-- /.box-body -->
-
+            </form>
             </div><!-- /.box -->
         </div>
     </div>
@@ -299,7 +306,6 @@
 </section><!-- /.content -->
 </aside><!-- /.right-side -->
 </div><!-- ./wrapper -->
-
 
 <!-- jQuery 2.0.2 -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -351,17 +357,52 @@
         $( "#tags" ).autocomplete({
           source: availableTags
       });
+
     });
 </script>
 <script type="text/javascript">
     function shwSlots(id){
         if(document.getElementById("shwRum_buk_slots").style.display == "block")
-            document.getElementById("shwRum_buk_slots").style.display = "none";
-        else
+          {  document.getElementById("shwRum_buk_slots").style.display = "none";
+
+           
+        }else{
             document.getElementById("shwRum_buk_slots").style.display = "block";
+            var shwrum_name = id;
+            var index = id.indexOf("_");
+
+            lat_lon = id.substring(index+1,id.length);
+            lat_lon_index = lat_lon.indexOf("_");
+            lat = lat_lon.substring(0,lat_lon_index);
+            lon = lat_lon.substring(lat_lon_index+1,lat_lon.length);
+            var dataString = "shwrum_name="+shwrum_name;
+            $.ajax({
+                type: "POST",
+                url: "getShwrumDet.php", // Name of the php files
+                data: dataString,
+                success: function(html)
+                {
+                    $("#shwRum_buk_slots_").html(html);
+                    showMarker(lat,lon);
+                }
+            });
+
+              
+        }
     }
-</script>>
+</script>
 </body>
 </html>
+<?php 
+/*
+if(isset($_POST['submit']))
+{
+    echo $_POST['slot'];
+    $slots = $_POST['slot'];
+    print '<script type="text/javascript">';
+print 'alert('.$slots.')';
+print '</script>'; 
+}*/
 
+?>
 
