@@ -145,11 +145,11 @@
                                             <input type="text" class="form-control" name="phNum" id="exampleInputPassword1" placeholder="10 Digit Mobile Number">
                                         </div>
                                         <div class="form_elem" style="width:465px">
-                                            <label>Appointment Date&nbsp;and&nbsp;Time<span class="error" id="adt">*</span></label>
+                                            <label>Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
                                             <p id="datepairExample">
-                                                <input type="text" style="float:left;width:165px" class="date start form-control" name="date__" placeholder="27/07/2014"/>
-                                                <input type="text" style="float:left;width:157px" class="time start form-control" name="time__" placeholder="11.30 am"/></p>
-                                            </div>
+                                                <input type="text" style="float:left;width:265px;padding-left:20px;text-align:center" class="date start form-control" name="date__" placeholder="eg.:27/07/2014"/>
+<!--                                                 <input type="text" style="float:left;width:157px" class="time start form-control" name="time__" placeholder="11.30 am"/></p>
+ -->                                            </div>
                                             <div class="form-group" style="clear:both;width:465px">
                                                 <label for="exampleInputEmail1">Email address</label>
                                                 <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Your Valid  email">
