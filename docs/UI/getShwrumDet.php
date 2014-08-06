@@ -3,33 +3,51 @@
 /* require_once("includes/connection.php"); */
 if ($_POST) {
     $shwrum_name = $_POST['shwrum_name'];
+    $date_ = $_POST['date'];
+
+    echo "<script>alert('".$date_."');</script>";
     if ($shwrum_name != '') {
       /* $sql1 = "SELECT ANAME FROM activity WHERE APRJCT= '$prjct_name'";
        $result1 = mysql_query($sql1);*/
-      $book_data=<<<EOD
-   
-                      <div  class="shwRum1_buk_slots" >You have selected <strong>ShowRoom1</strong><i><strong>- Book Your Slot...</strong></i></div>
-                                                       
-                    <div class=" table-responsive no-padding" style="margin-left:3%;width:550px;float:left">
-                        <table class="table table-hover">
-         <tr>
-                                <th><input type="radio" name="slot" value="9">&nbsp;&nbsp;9am&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                                <th><input type="radio" name="slot" value="10">&nbsp;&nbsp;10am&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                                <th><input type="radio" name="slot" value="11">&nbsp;&nbsp;11am&nbsp;<span class="badge bg-green">4 Slots</span></th>
-                                <th><input type="radio" name="slot" value="12">&nbsp;&nbsp;12pm&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                            </tr>
-                            <tr>
-                                <th><input type="radio" name="slot" value="1">&nbsp;&nbsp;1pm&nbsp;&nbsp;<span class="badge bg-red">2 Slots</span></th>
-                                <th><input type="radio" name="slot" value="2">&nbsp;&nbsp;2pm&nbsp;&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                                <th><input type="radio" name="slot" value="3">&nbsp;&nbsp;3pm&nbsp;&nbsp;<span class="badge bg-grey">0 Slots</span></th>
-                                <th><input type="radio" name="slot" value="4">&nbsp;&nbsp;4pm&nbsp;&nbsp;<span class="badge bg-green">6 Slots</span></th>
-                            </tr>
-                            <tr>
-                                <th><input type="radio" name="slot" value="5">&nbsp;&nbsp;5pm&nbsp;&nbsp;<span class="badge bg-green">9 Slots</span></th>
-                                <th><input type="radio" name="slot" value="6">&nbsp;&nbsp;6pm&nbsp;&nbsp;<span class="badge bg-green">5 Slots</span></th>
-                                <th><input type="radio" name="slot" value="7">&nbsp;&nbsp;7pm&nbsp;&nbsp;<span class="badge bg-green">4 Slots</span></th>
-                                <th><input type="radio" name="slot" value="8">&nbsp;&nbsp;8pm&nbsp;&nbsp;<span class="badge bg-red">1 Slots</span></th>
-                            </tr>
+      // $date_ = "2014-08-07";
+       $sname = $shwrum_name;
+       function getslots($name,$dt,$slothr){
+            include ("../../includes/db/connection.php"); 
+            $query = "SELECT count(*), slots FROM slots where (hour='".$slothr."' and DATE_FORMAT(day,'%d-%m-%Y')='".$dt."'  and sid='".$name."')";
+            $query_result = mysql_query($query,$con)
+            or die("Invalid query: " . mysql_error());
+            $res = mysql_fetch_array($query_result);
+            $c=$res['count(*)'];
+            if($c<=0){
+                $query =  'INSERT INTO slots VALUES ("'.$name.'", "'.$dt.'", "'.$slothr.'", "10")';            
+                $query_result = mysql_query($query,$con)
+                or die("Invalid query: " . mysql_error());
+                
+                return '<th><input type="radio" name="slot" value="'.$slothr.'">&nbsp;&nbsp;'.$slothr.':00&nbsp;<span class="badge bg-green">10 Slots</span></th>';
+            }
+            else{
+                return '<th><input type="radio" name="slot" value="'.$slothr.'">&nbsp;&nbsp;'.$slothr.':00&nbsp;<span class="badge bg-green">'.$res['slots'].' Slots</span></th>';
+            }
+       }
+      $book_data='<div  class="shwRum1_buk_slots" >You have selected <strong>ShowRoom1</strong><i><strong>- Book Your Slot...</strong></i></div>';
+       $book_data.='<div class=" table-responsive no-padding" style="margin-left:3%;width:550px;float:left">';
+       $book_data.='<table class="table table-hover"><tr>';
+       $book_data.= getslots($sname,$date_,"9");
+       $book_data.=getslots($sname,$date_,"10");
+       $book_data.=getslots($sname,$date_,"11");
+       $book_data.=getslots($sname,$date_,"12");
+       $book_data.="</tr><tr>";
+       $book_data.=getslots($sname,$date_,"13");
+       $book_data.=getslots($sname,$date_,"14");
+       $book_data.=getslots($sname,$date_,"15");
+       $book_data.=getslots($sname,$date_,"16");
+       $book_data.="</tr><tr>";
+       $book_data.=getslots($sname,$date_,"17");
+       $book_data.=getslots($sname,$date_,"18");
+       $book_data.=getslots($sname,$date_,"19");
+       $book_data.=getslots($sname,$date_,"20");
+       $book_data.="</tr>";
+       $book_data.=<<<EOD
                         </table>
                     </div>
                      <div style="width:200px;float:right;">

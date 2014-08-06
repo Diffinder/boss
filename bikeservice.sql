@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 06, 2014 at 12:29 AM
+-- Generation Time: Aug 07, 2014 at 12:04 AM
 -- Server version: 5.5.38-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.3
 
@@ -149,6 +149,14 @@ CREATE TABLE IF NOT EXISTS `prices` (
   PRIMARY KEY (`S_id`,`item_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `prices`
+--
+
+INSERT INTO `prices` (`S_id`, `item_name`, `price`) VALUES
+(1, 'Periodic Servicing', 780),
+(1, 'Waterwash', 250);
+
 -- --------------------------------------------------------
 
 --
@@ -257,6 +265,50 @@ CREATE TABLE IF NOT EXISTS `showroom_quality` (
 
 INSERT INTO `showroom_quality` (`S_id`, `quality`) VALUES
 (1, 'Good');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slots`
+--
+
+CREATE TABLE IF NOT EXISTS `slots` (
+  `sid` int(11) NOT NULL,
+  `day` date NOT NULL,
+  `hour` int(11) NOT NULL,
+  `slots` int(11) NOT NULL DEFAULT '10',
+  UNIQUE KEY `sid` (`sid`,`day`,`hour`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `slots`
+--
+
+INSERT INTO `slots` (`sid`, `day`, `hour`, `slots`) VALUES
+(1, '2014-08-07', 9, 7),
+(1, '2014-08-07', 10, 9),
+(1, '2014-08-07', 11, 10),
+(1, '2014-08-07', 12, 10),
+(1, '2014-08-07', 13, 10),
+(1, '2014-08-07', 14, 10),
+(1, '2014-08-07', 15, 10),
+(1, '2014-08-07', 16, 10),
+(1, '2014-08-07', 17, 10),
+(1, '2014-08-07', 18, 10),
+(1, '2014-08-07', 19, 10),
+(1, '2014-08-07', 20, 10),
+(7, '2014-08-07', 9, 10),
+(7, '2014-08-07', 10, 10),
+(7, '2014-08-07', 11, 10),
+(7, '2014-08-07', 12, 10),
+(7, '2014-08-07', 13, 10),
+(7, '2014-08-07', 14, 10),
+(7, '2014-08-07', 15, 10),
+(7, '2014-08-07', 16, 10),
+(7, '2014-08-07', 17, 10),
+(7, '2014-08-07', 18, 10),
+(7, '2014-08-07', 19, 10),
+(7, '2014-08-07', 20, 10);
 
 -- --------------------------------------------------------
 

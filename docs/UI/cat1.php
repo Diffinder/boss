@@ -1,5 +1,6 @@
-
 <!DOCTYPE html>
+<?php   session_start(); 
+require_once("../../includes/db/connection.php"); ?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -221,43 +222,26 @@ google.maps.event.addDomListener(window, 'load', initialize);
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                     <th>Select</th>
+                                     
                                      <th>Service Provider</th>
                                      <th>Rating</th>
                                      <th>Address</th>
                                      <th>Amenities</th>
                                      <th>Price</th>
+                                     <th>Select</th>
                                  </tr>
                              </thead>
-                             <tbody id="det_tab">
-                                <tr>
-                                    <th>Rishi Hero</th>
-                                    <th>Good</th>
-                                    <th>Thubarahalli,Whitefield</th>
-                                    <th>Free PickUp, GoodLife Membership</th>
-                                    <th>1500 INR</th>
-                                    <th>
-                                        <button id="shwRum1_-7.79793_ 110.36933" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button>
-                                    </th>
-                                </tr>
-                                <tr>
-                                 <th>Kaveri Motors</th>
-                                 <th>Good</th>
-                                 <th>Marathahalli,Whitefield</th>
-                                 <th>Free WaterWash for Next Service</th>
-                                 <th>1700 INR</th>
-                                 <th> <button id="shwRum2_-7.79793_ 110.36933" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button></th>
-                             </tr>
-
+                             <tbody id="detail_tab">
+                                
                          </tbody>
                          <tfoot>
                             <tr>
-                              <th>Select</th>
                               <th>Service Provider</th>
                               <th>Rating</th>
                               <th>Address</th>
                               <th>Amenities</th>
                               <th>Price</th>
+                              <th>Select</th>
                           </tr>
                       </tfoot>
                   </table>
@@ -370,12 +354,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
             document.getElementById("shwRum_buk_slots").style.display = "block";
             var shwrum_name = id;
             var index = id.indexOf("_");
-
+            var sname = id.substring(0,index);
+            var dt="<?php echo $_SESSION["date"]; ?>";
             lat_lon = id.substring(index+1,id.length);
             lat_lon_index = lat_lon.indexOf("_");
             lat = lat_lon.substring(0,lat_lon_index);
             lon = lat_lon.substring(lat_lon_index+1,lat_lon.length);
-            var dataString = "shwrum_name="+shwrum_name;
+            var dataString = 'shwrum_name='+sname+'&date='+dt ;
             $.ajax({
                 type: "POST",
                 url: "getShwrumDet.php", // Name of the php files
@@ -393,16 +378,81 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </script>
 </body>
 </html>
-<?php 
-/*
-if(isset($_POST['submit']))
-{
-    echo $_POST['slot'];
-    $slots = $_POST['slot'];
-    print '<script type="text/javascript">';
-print 'alert('.$slots.')';
-print '</script>'; 
-}*/
+<?php
+function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
-?>
+  $theta = $lon1 - $lon2;
+  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+  $dist = acos($dist);
+  $dist = rad2deg($dist);
+  $miles = $dist * 60 * 1.1515;
+  $unit = strtoupper($unit);
+
+  if ($unit == "K") {
+    return ($miles * 1.609344);
+  } else if ($unit == "N") {
+      return ($miles * 0.8684);
+    } else {
+        return $miles;
+      }
+}
+$dist=3.00;
+$_SESSION['servicetype']='Periodic Servicing';
+$_SESSION['area']='Domlur';
+$place=$_SESSION['area'];
+       
+    $query = "SELECT * FROM area where area='".$place."'";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $query2 = "SELECT * FROM area";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+    $O_row=" ";
+   
+   
+    $src=mysql_fetch_array($query_result);
+    $areas="'".$src['area']."'";
+    while ($rw1 = mysql_fetch_array($query_result2)) {
+          if(distance($src['lati'],$src['longi'],$rw1['lati'],$rw1['longi'])<$dist and $src['area']!=$rw1['area']){
+            $areas = $areas.",'".$rw1['area']."'";
+        }
+    }
+    $queryx = "SELECT * FROM serv_center where area in (".$areas.")";
+    $queryx_result = mysql_query($queryx,$con)
+    or die("Invalid query: " . mysql_error());
+    while ($rw1 = mysql_fetch_array($queryx_result)) {
+
+        $query = "SELECT quality FROM showroom_quality where S_id='".$rw1[S_id]."'";
+        $query_result = mysql_query($query,$con)
+        or die("Invalid query: " . mysql_error());
+        $qual = mysql_fetch_array($query_result);
+        $q=$qual['quality'];
+
+        $query = "SELECT amenity,description FROM Amenities where
+S_id='".$rw1[S_id]."'";         $query_result = mysql_query($query,$con)
+or die("Invalid query: " . mysql_error());         $amnty="";
+while($amm = mysql_fetch_array($query_result)){
+$amnty.=$amm['amenity']." - ".$amm['description'].", ";         }
+
+        $query = "SELECT price FROM prices where (S_id='".$rw1[S_id]."' and item_name='".$_SESSION['servicetype']."')";
+        $query_result = mysql_query($query,$con)
+        or die("Invalid query: " . mysql_error());
+        $qual = mysql_fetch_array($query_result);
+        $p=$qual['price'];
+
+
+        $O_row.="<tr>";
+        $O_row.="<td>$rw1[S_name]</td>";
+        $O_row.="<td>".$q."</td>";
+        $O_row.="<td>$rw1[address]</td>";
+        $O_row.="<td>".$amnty."</td>";
+        $O_row.="<td>Rs. ".$p."</td>";
+        $O_row.='<td><button id="'.$rw1[S_id].'_'.$rw1['lati'].'_'.$rw1['longi'].'" class="btn btn-success btn-flat" style="margin-left:35px" onclick="shwSlots(this.id);">Select</button></td>';
+        $O_row.="</tr>";
+     }
+
+
+print "<script>document.getElementById('detail_tab').innerHTML='".$O_row."';</script>";
+
+    ?>
 
