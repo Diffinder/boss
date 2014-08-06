@@ -43,7 +43,9 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","docs/Service/bikelist.php?company="+company,true);
 xmlhttp.send();
 }
-
+function checkfield(){
+    if(document.getElementById("ph"))
+}
 
 </script>
 <body>
@@ -116,28 +118,28 @@ xmlhttp.send();
                                     <h3 class="box-title"></h3>
                                 </div> /.box-header --> 
                                 <!-- form start -->
-                                <form role="form" action ="index.php" method="POST">
+                                <form role="form" action ="docs/Service/choice.php" method="POST">
                                     <div class="box-body">
                                         <div class="form-group" style="width:465px">
                                             <label for="exampleInputPassword1">Your Location<!--Added--><span class="error" id="ph">*</span></label>
-                                            <input type="text" class="form-control" name="phNum" id="tags" placeholder="Start typing your area, eg. Marathahalli">
+                                            <input type="text" class="form-control" name="area" id="area" placeholder="Start typing your area, eg. Marathahalli">
                                         </div>
                                         <div class="form-group" style="clear:both;float:left;">
                                             <label>Service Category<!--Added--><span class="error" id="scat">*</span></label>
-                                            <select class="form-control" name="servicing">
+                                            <select class="form-control" name="servicetype" id="stype">
                                                 <option selected="true">--Select--</option>
-                                                <option value="11">Periodic Servicing</option>
-                                                <option value="12">Water-wash Service</option>
-                                                <option value="21">Repair</option>
-                                                <option value="21">Accidental</option>
-                                                <option value="31">Puncture</option>
-                                                <option value="13">Insurance Renewal</option>
-                                                <option value="41">Accessories/Spairs</option>
+                                                <option value="Periodic Servicing">Periodic Servicing</option>
+                                                <option value="Waterwash Service">Waterwash Service</option>
+                                                <option value="Repair">Repair</option>
+                                                <option value="Accidental">Accidental</option>
+                                                <option value="Puncture">Puncture</option>
+                                                <option value="Insurance Renewal">Insurance Renewal</option>
+                                                <option value="Accessories/Spairs">Accessories/Spairs</option>
                                             </select>
                                         </div>
                                         <div class="form-group" style="float:left;margin-left:20px;">
                                          <label>Bike Company<span class="error" id="scat">*</span></label>
-                                        <select class="form-control" id="mark" name="mark" onchange="bikelist(this.value)">
+                                        <select class="form-control" id="company" name="company" onchange="bikelist(this.value)">
                                          <option value="">--Select--</option>
                                               <option value="Bajaj">Bajaj</option>
                                               <option value="Hero">Hero</option>
@@ -151,14 +153,9 @@ xmlhttp.send();
                                     </div>
                                     <div class="form-group" style="float:left;margin-left:20px;">
                                      <label>Bike Model<span class="error" id="bikename">*</span></label>
-                                        <select class="form-control" id="bikediv" name="series">
+                                        <select class="form-control" id="bikediv" name="model">
                                            <option value="">--Select--</option>
-                                              <option value="Avenger" class="Bajaj">Avenger</option>
-                                              <option value="Karizma" class="Hero">Karizma</option>
-                                              <option value="Twister" class="Honda">Twister</option>
-                                              <option value="ThunderBird" class="Enfield">ThunderBird</option>
-                                              <option value="FZ" class="Yamaha">FZ</option>
-                                              <option value="Duke" class="KTM">DUKE</option>
+                                             
                                         </select>
                                     </div>
                                             <script src="script/js/jquery-1.10.2.js"></script>
@@ -169,17 +166,17 @@ xmlhttp.send();
                                         </script>
                                         <div class="form-group" style="clear:both;width:185px;float:left;">
                                             <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error" id="ph">*</span></label>
-                                            <input type="text" class="form-control" name="phNum" id="exampleInputPassword1" placeholder="10 Digit Mobile Number">
+                                            <input type="text" class="form-control" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
                                         </div>
                                         <div class="form_elem" style="width:465px;">
                                             <label style="margin-left:20px;">Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
                                             <p id="datepairExample">
-                                                <input type="text" style="float:left;width:245px;padding-left:20px;margin-left:20px;text-align:center" class="date start form-control" name="date__" placeholder="eg.:27/07/2014"/>
+                                                <input type="text" style="float:left;width:245px;padding-left:20px;margin-left:20px;text-align:center" class="date start form-control" name="date_" placeholder="eg.:27/07/2014"/>
 <!--                                                 <input type="text" style="float:left;width:157px" class="time start form-control" name="time__" placeholder="11.30 am"/></p>
  -->                                            </div>
                                             <div class="form-group" style="clear:both;width:465px">
                                                 <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Enter Your Valid  email">
+                                                <input type="email" name="email" class="form-control" id="email" onchange="checkfield();" placeholder="Enter Your Valid  email">
                                             </div>
                                         </div><!-- /.box-body -->
 
