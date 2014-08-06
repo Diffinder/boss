@@ -116,7 +116,7 @@ xmlhttp.send();
                                     <h3 class="box-title"></h3>
                                 </div> /.box-header --> 
                                 <!-- form start -->
-                                <form role="form" action ="docs/UI/cat1.php" method="POST">
+                                <form role="form" action ="index.php" method="POST">
                                     <div class="box-body">
                                         <div class="form-group" style="width:465px">
                                             <label for="exampleInputPassword1">Your Location<!--Added--><span class="error" id="ph">*</span></label>
@@ -126,13 +126,13 @@ xmlhttp.send();
                                             <label>Service Category<!--Added--><span class="error" id="scat">*</span></label>
                                             <select class="form-control" name="servicing">
                                                 <option selected="true">--Select--</option>
-                                                <option>Periodic Servicing</option>
-                                                <option>Water-wash Service</option>
-                                                <option>Repair</option>
-                                                <option>Accidental</option>
-                                                <option>Puncture</option>
-                                                <option>Request for Renewal</option>
-                                                <option>Accessories/Spairs</option>
+                                                <option value="11">Periodic Servicing</option>
+                                                <option value="12">Water-wash Service</option>
+                                                <option value="21">Repair</option>
+                                                <option value="21">Accidental</option>
+                                                <option value="31">Puncture</option>
+                                                <option value="13">Insurance Renewal</option>
+                                                <option value="41">Accessories/Spairs</option>
                                             </select>
                                         </div>
                                         <div class="form-group" style="float:left;margin-left:20px;">
@@ -167,14 +167,14 @@ xmlhttp.send();
                                         <script type="text/javascript">
                                             $("#series").chained("#mark");
                                         </script>
-                                        <div class="form-group" style="clear:both;width:465px">
+                                        <div class="form-group" style="clear:both;width:185px;float:left;">
                                             <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error" id="ph">*</span></label>
                                             <input type="text" class="form-control" name="phNum" id="exampleInputPassword1" placeholder="10 Digit Mobile Number">
                                         </div>
-                                        <div class="form_elem" style="width:465px">
-                                            <label>Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
+                                        <div class="form_elem" style="width:465px;">
+                                            <label style="margin-left:20px;">Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
                                             <p id="datepairExample">
-                                                <input type="text" style="float:left;width:265px;padding-left:20px;text-align:center" class="date start form-control" name="date__" placeholder="eg.:27/07/2014"/>
+                                                <input type="text" style="float:left;width:245px;padding-left:20px;margin-left:20px;text-align:center" class="date start form-control" name="date__" placeholder="eg.:27/07/2014"/>
 <!--                                                 <input type="text" style="float:left;width:157px" class="time start form-control" name="time__" placeholder="11.30 am"/></p>
  -->                                            </div>
                                             <div class="form-group" style="clear:both;width:465px">
@@ -189,8 +189,7 @@ xmlhttp.send();
                                     </form>
                                 </div><!-- /.box -->
                             </div>
-                            <div class="col-md-6" style="padding-left:80px">
-                               <br/><br/>
+                            <div class="col-md-6" style="padding-left:80px"></br>
                                <div class="box box-primary">
                                   <div class="box box-solid">
                                     <div class="box-body">
@@ -345,3 +344,24 @@ xmlhttp.send();
 </body>
 
 </html>
+<?php
+if(isset($_POST['submit'])){ 
+    if($_POST['servicing'] == "11" || $_POST['servicing'] == "12" || $_POST['servicing'] == "13"){
+    header("location:docs/UI/cat1.php");
+    }
+    else if($_POST['servicing'] == "21" || $_POST['servicing'] == "22"){
+            header("location:docs/UI/cat2.php");
+    }
+    else if($_POST['servicing'] == "31"){
+            header("location:docs/UI/cat3.php");
+    }
+    else if ($_POST['servicing'] == "41") {
+            header("location:docs/UI/cat4.php");
+    }
+    else{
+        print("<script>");
+        print("alert('Enter Correct Values');");
+        print("</script>");
+    }
+}
+?>
