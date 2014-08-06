@@ -221,12 +221,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                     <th>Select</th>
+                                     
                                      <th>Service Provider</th>
                                      <th>Rating</th>
                                      <th>Address</th>
                                      <th>Amenities</th>
                                      <th>Price</th>
+                                     <th>Select</th>
                                  </tr>
                              </thead>
                              <tbody id="det_tab">
@@ -252,12 +253,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
                          </tbody>
                          <tfoot>
                             <tr>
-                              <th>Select</th>
                               <th>Service Provider</th>
                               <th>Rating</th>
                               <th>Address</th>
                               <th>Amenities</th>
                               <th>Price</th>
+                              <th>Select</th>
                           </tr>
                       </tfoot>
                   </table>
