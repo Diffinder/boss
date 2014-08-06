@@ -44,7 +44,7 @@ xmlhttp.open("GET","docs/Service/bikelist.php?company="+company,true);
 xmlhttp.send();
 }
 function checkfield(){
-    if(document.getElementById("ph"))
+    if(document.getElementById("ph").i)
 }
 
 </script>
