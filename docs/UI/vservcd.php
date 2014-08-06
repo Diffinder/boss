@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 <html>
+<?php
+$sid=1;
+require_once("../../includes/db/connection.php"); 
+$query = "SELECT * FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and (o_stat='Serviced' or o_stat='Delivery Done') )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+   $O_row="";
+   while ($rw1=mysql_fetch_array($query_result)) {
+    $O_row.="<tr>";
+    $O_row.="<td>$rw1[Ven_Oid]</td>";
+    $O_row.="<td>$rw1[Bike]</td>";
+    $O_row.="<td>$rw1[order_cat]</td>";
+    $O_row.="<td>$rw1[o_stat]</td>";
+    $O_row.="<td>$rw1[order_time]</td>";
+    $O_row.="<td>$rw1[order_contact]</td>";
+    $O_row.="</tr>";
+    }
+    
+    
+?>
     <head>
         <meta charset="UTF-8">
         <title>Spring Street</title>
@@ -234,48 +254,18 @@
                                 <div class="box-body table-responsive">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
-                                            <tr>
+                                           <tr>
                                                 <th class="sorting_desc">Order ID</th>
                                                 <th>Bike</th>
                                                 <th>Service Type</th>
                                                 <th>Status</th>
                                                 <th>Ordered On</th>
-                                                <th>Pick Up</th>
                                                 <th>Contact</th>
                                                 
                                             </tr>
                                         </thead>
                                         <tbody id="det_tab">
-                                                <tr>
-                                                <th >123456789</th>
-                                                <th>karizma</th>
-                                                <th>Periodic Servicing</th>
-                                                <th>Confirmed</th>
-                                                <th>27-07-2014</th>
-                                                <th>Yes</th>
-                                                <th>8123456789</th>
                                                 
-                                            </tr>
-                                             <tr>
-                                                <th >123456789</th>
-                                                <th>karizma</th>
-                                                <th>Periodic Servicing</th>
-                                                <th>Confirmed</th>
-                                                <th>27-07-2014</th>
-                                                <th>Yes</th>
-                                                <th>8123456789</th>
-                                                
-                                            </tr>
-                                             <tr>
-                                                <th >123456789</th>
-                                                <th>karizma</th>
-                                                <th>Periodic Servicing</th>
-                                                <th>Confirmed</th>
-                                                <th>27-07-2014</th>
-                                                <th>Yes</th>
-                                                <th>8123456789</th>
-                                                
-                                            </tr>
                                             
                                         </tbody>
                                         <tfoot>
@@ -285,7 +275,6 @@
                                                 <th>Service Type</th>
                                                 <th>Status</th>
                                                 <th>Ordered On</th>
-                                                <th>Pick Up</th>
                                                 <th>Contact</th>
                                              </tr>
                                         </tfoot>
@@ -533,6 +522,9 @@
 
         </script>
     </body>
+     <?php
+    print "<script>document.getElementById('det_tab').innerHTML='$O_row';</script>";
+    ?>
 </html>
 
     

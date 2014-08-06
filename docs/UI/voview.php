@@ -1,4 +1,185 @@
 <!DOCTYPE html>
+<?php
+$sid=1;
+$today=date("Y-m-d");
+$today="2014-07-25";
+require_once("../../includes/db/connection.php"); 
+$query = "SELECT * FROM vendor_order where S_id=$sid";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$total=mysql_fetch_array($query_result);
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp=$new['dp'];
+
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Allotted' and final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A=$new['A'];
+
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C=$new['C'];
+
+$query = "SELECT count(*) as pick FROM vendor_order where (S_id=$sid and pickup=0 and final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') " ;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$pick=$new['pick'];
+
+$query = "SELECT count(*) as Nopick FROM vendor_order where (S_id=$sid and pickup=1 and final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$Nopick=$new['Nopick'];
+
+$query1 = "SELECT count(*) as day FROM vendor_order where (S_id=$sid and final_aapt_dt between '$today 00:00:00' and  '$today 18:00:00') " ;
+    $query_result1 = mysql_query($query1,$con)
+    or die("Invalid query: " . mysql_error());
+$day=mysql_fetch_array($query_result1);
+$daycount=$day['day'];
+$query2 = "SELECT count(*) as night FROM vendor_order where (S_id=$sid and final_aapt_dt between '$today 18:00:00' and  '$today 23:59:59') ";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+$night=mysql_fetch_array($query_result2);
+$nightcount=$night['night'];
+
+$query2 = "SELECT count(*) as ww FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and order_det.order_cat='Waterwash' and vendor_order.final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') ";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+$ww=mysql_fetch_array($query_result2);
+$wwcount=$ww['ww'];
+
+$query2 = "SELECT count(*) as ww FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and order_det.order_cat='Periodic Servicing' and vendor_order.final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') ";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+$ww=mysql_fetch_array($query_result2);
+$pscount=$ww['ww'];
+
+$query2 = "SELECT count(*) as ww FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and order_det.order_cat='Repair' and vendor_order.final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') ";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+$ww=mysql_fetch_array($query_result2);
+$repaircount=$ww['ww'];
+
+$query2 = "SELECT count(*) as ww FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and order_det.order_cat='Insurance' and vendor_order.final_aapt_dt between '$today 00:00:00' and  '$today 23:59:59') ";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+$ww=mysql_fetch_array($query_result2);
+$inscount=$ww['ww'];
+
+
+?>
+<?php
+$day1=date("Y-m-d", time()+86400); 
+$day2=date("Y-m-d", time()+86400*2); 
+$day3=date("Y-m-d", time()+86400*3); 
+$day4=date("Y-m-d", time()+86400*4); 
+$day5=date("Y-m-d", time()+86400*5); 
+$day6=date("Y-m-d", time()+86400*6); 
+
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day1 00:00:00' and  '$day1 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp1=$new['dp'];
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day2 00:00:00' and  '$day2 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp2=$new['dp'];
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day3 00:00:00' and  '$day3 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp3=$new['dp'];
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day4 00:00:00' and  '$day4 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp4=$new['dp'];
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day5 00:00:00' and  '$day5 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp5=$new['dp'];
+$query = "SELECT count(*) as dp FROM vendor_order where (S_id=$sid and o_stat='Query' and exp_aapt_dt between '$day6 00:00:00' and  '$day6 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$dp6=$new['dp'];
+
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day1 00:00:00' and  '$day1 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A1=$new['A'];
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day2 00:00:00' and  '$day2 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A2=$new['A'];
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day3 00:00:00' and  '$day3 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A3=$new['A'];
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day4 00:00:00' and  '$day4 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A4=$new['A'];
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day5 00:00:00' and  '$day5 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A5=$new['A'];
+$query = "SELECT count(*) as A FROM vendor_order where (S_id=$sid and o_stat='Decision Pending' and exp_aapt_dt between '$day6 00:00:00' and  '$day6 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$A6=$new['A'];
+
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day1 00:00:00' and  '$day1 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C1=$new['C'];
+
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day2 00:00:00' and  '$day2 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C2=$new['C'];
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day3 00:00:00' and  '$day3 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C3=$new['C'];
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day4 00:00:00' and  '$day4 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C4=$new['C'];
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day5 00:00:00' and  '$day5 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C5=$new['C'];
+$query = "SELECT count(*) as C FROM vendor_order where (S_id=$sid and o_stat='Confirmed' and final_aapt_dt between '$day6 00:00:00' and  '$day6 23:59:59') " ;;
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+$new=mysql_fetch_array($query_result);
+$C6=$new['C'];
+ 
+
+?>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -18,6 +199,125 @@ ${demo.css}
         </style>
         <script type="text/javascript">
 $(function () {
+        $('#container01').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Today'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'Orders'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -235,
+                y: 63,
+                floating: true,
+                borderWidth: 0,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'DP',
+                data: [<?php echo $dp;?>]
+            }, {
+                name: 'C',
+                data: [<?php echo $C;?>]
+            }, {
+                name: 'A',
+                data: [<?php echo $A;?>]
+            }]
+        });
+        $('#container21').highcharts({
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                categories: ['Day','Overnight'],
+                title: {
+                    text: null
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                valueSuffix: 'Orders'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -250,
+                y: 63,
+                floating: true,
+                borderWidth: 0,
+                backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor || '#FFFFFF'),
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'D',
+                data: [<?php echo $daycount;?>]
+            }, {
+                name: 'N',
+                data: [<?php echo $nightcount;?>]
+            }]
+        });
         $('#container11').highcharts({
             chart: {
                 type: 'bar'
@@ -29,7 +329,7 @@ $(function () {
                 text: 'Source: Spring Street'
             },
             xAxis: {
-                categories: ['21/07', '22/07', '23/07', '24/07', '25/07' ,'26/07'],
+                categories: [<?php echo "'".$day1."','".$day2."','".$day3."','".$day4."','".$day5."','".$day6."'";?>],
                 title: {
                     text: null
                 }
@@ -69,17 +369,26 @@ $(function () {
                 enabled: false
             },
             series: [{
-                name: 'UnAllotted',
-                data: [107, 31, 635, 203, 2,35]
+                name: 'Queried',
+                data: [<?php echo $dp1.",".$dp2.",".$dp3.",".$dp4.",".$dp5.",".$dp6;?>]
             }, {
-                name: 'Upcoming',
-                data: [133, 156, 947, 408, 6,123]
+                name: 'Confirmed',
+                data: [<?php echo $C1.",".$C2.",".$C3.",".$C4.",".$C5.",".$C6;?>]
             }, {
-                name: 'Allotted',
-                data: [973, 914, 405, 732, 34,1234]
+                name: 'Expected',
+                data: [<?php echo $A1.",".$A2.",".$A3.",".$A4.",".$A5.",".$A6;?>]
             }]
         });
             $(".knob").knob({
+                    /*change : function (value) {
+                     //console.log("change : " + value);
+                     },
+                     release : function (value) {
+                     console.log("release : " + value);
+                     },
+                     cancel : function () {
+                     console.log("cancel : " + this.value);
+                     },*/
                     draw: function() {
 
                         // "tron" case
@@ -357,11 +666,8 @@ $(function () {
                                         <button class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
                                     </div>
                                 </div><!-- /.box-header -->
-                                <div class="box-body text-center">
-                                    <div class="sparkline" data-type="bar" data-width="100%" data-height="100px" data-bar-Width="44" data-bar-Spacing="10" data-bar-Color="#f39c12">
-                                        40,38,38,44,39
-                                    </div>
-                                </div><!-- /.box-body -->
+                                 <div id="container01" style="min-width: 110px; max-width: 300px; height: 150px; margin: 0 auto"></div>
+
                             </div><!-- /.box -->
                         </div><!-- /.col -->
                         <div class="col-md-4" style="">
@@ -373,9 +679,7 @@ $(function () {
                                     </div>
                                 </div><!-- /.box-header -->
                                 <div class="box-body text-center">
-                                    <div class="sparkline" data-type="bar" data-width="97%" data-height="100px" data-bar-Width="44" data-bar-Spacing="7" data-bar-Color="#00a65a">
-                                        10,6
-                                    </div>
+                                     <div id="container21" style="min-width: 110px; max-width: 300px; height: 150px; margin: 0 auto"></div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </div><!-- /.col -->
@@ -389,7 +693,7 @@ $(function () {
                                 </div><!-- /.box-header -->
                                 <div class="box-body text-center">
                                     <div class="sparkline" data-type="pie" data-offset="90" data-width="100px" data-height="100px">
-                                        6,4
+                                       <?php echo $pick.",".$Nopick;?>
                                     </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -410,19 +714,19 @@ $(function () {
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="43" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
+                                            <input type="text" class="knob" readOnly="true" value="<?php echo $pscount;?>" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
                                             <div class="knob-label">Periodic Servicing</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="32" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
+                                            <input type="text" class="knob" value="<?php echo $wwcount;?>" readOnly="true" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
                                             <div class="knob-label">Water Wash</div>
                                         </div><!-- ./col -->
                                        <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="54" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
+                                            <input type="text" class="knob" value="<?php echo $repaircount;?>" data-skin="tron" readOnly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
                                             <div class="knob-label">Repair/Accidental</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="14" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
+                                            <input type="text" class="knob" value="<?php echo $inscount;?>" data-skin="tron" readOnly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
                                             <div class="knob-label">Insurance Renewal</div>
                                         </div><!-- ./col -->
 
@@ -464,31 +768,31 @@ $(function () {
                                  <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgColor="#3c8dbc"/>
-                                            <div class="knob-label">21/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp1+$C1?>" data-width="90" data-height="90" data-fgColor="#3c8dbc"/>
+                                            <div class="knob-label"><?php echo $day1;?></div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="70" data-width="90" data-height="90" data-fgColor="#f56954"/>
-                                            <div class="knob-label">22/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp2+$C2?>" data-width="90" data-height="90" data-fgColor="#f56954"/>
+                                            <div class="knob-label"><?php echo $day2;?></div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="80"  data-width="90" data-height="90" data-fgColor="#00a65a"/>
-                                            <div class="knob-label">23/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp3+$C3?>"  data-width="90" data-height="90" data-fgColor="#00a65a"/>
+                                            <div class="knob-label"><?php echo $day3;?></div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="40" data-width="90" data-height="90" data-fgColor="#00c0ef"/>
-                                            <div class="knob-label">24/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp4+$C4?>" data-width="90" data-height="90" data-fgColor="#00c0ef"/>
+                                            <div class="knob-label"><?php echo $day4;?></div>
                                         </div><!-- ./col -->
                                     </div><!-- /.row -->
 
                                     <div class="row">
                                         <div class="col-xs-6 text-center">
-                                            <input type="text" class="knob" value="90" data-width="90" data-height="90" data-fgColor="#932ab6"/>
-                                            <div class="knob-label">25/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp5+$C5?>" data-width="90" data-height="90" data-fgColor="#932ab6"/>
+                                            <div class="knob-label"><?php echo $day5;?></div>
                                         </div><!-- ./col -->
                                         <div class="col-xs-6 text-center">
-                                            <input type="text" class="knob" value="50" data-width="90" data-height="90" data-fgColor="#39CCCC"/>
-                                            <div class="knob-label">26/07</div>
+                                            <input type="text" class="knob" value="<?php echo $dp6+$C6?>" data-width="90" data-height="90" data-fgColor="#39CCCC"/>
+                                            <div class="knob-label"><?php echo $day6;?></div>
                                         </div><!-- ./col -->
                                     </div><!-- /.row -->
                                 </div><!-- /.box-body -->

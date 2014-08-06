@@ -1,4 +1,28 @@
 <!DOCTYPE html>
+<?php
+$sid=1;
+require_once("../../includes/db/connection.php"); 
+$query = "SELECT * FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where vendor_order.S_id=$sid ";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+   $O_row="";
+   while ($rw1=mysql_fetch_array($query_result)) {
+    $O_row.="<tr>";
+    $O_row.="<td>$rw1[Ven_Oid]</td>";
+    $O_row.="<td>$rw1[Bike]</td>";
+    $O_row.="<td>$rw1[order_cat]</td>";
+    $O_row.="<td>$rw1[o_stat]</td>";
+    $O_row.="<td>$rw1[order_time]</td>";
+    if($rw1[pickup]==0)
+        $O_row.="<td>Yes</td>";
+    else
+         $O_row.="<td>No</td>";
+    $O_row.="<td>$rw1[order_contact]</td>";
+    $O_row.="</tr>";
+    }
+    
+    
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -532,6 +556,9 @@
 
         </script>
     </body>
+    <?php
+    print "<script>document.getElementById('det_tab').innerHTML='$O_row';</script>";
+    ?>
 </html>
 
     

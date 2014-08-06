@@ -1,4 +1,48 @@
 <!DOCTYPE html>
+<?php
+$sid=1;
+require_once("../../includes/db/connection.php"); 
+$query = "SELECT * FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and o_stat='Confirmed' )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+   $O_row="";
+   while ($rw1=mysql_fetch_array($query_result)) {
+    $O_row.="<tr>";
+    $O_row.="<td>$rw1[Ven_Oid]</td>";
+    $O_row.="<td>$rw1[Bike]</td>";
+    $O_row.="<td>$rw1[order_cat]</td>";
+    $O_row.="<td>$rw1[o_stat]</td>";
+    $O_row.="<td>$rw1[order_time]</td>";
+    if($rw1[pickup]==0)
+        $O_row.="<td>Yes</td>";
+    else
+         $O_row.="<td>No</td>";
+    $O_row.="<td>$rw1[order_contact]</td>";
+    $O_row.="</tr>";
+    }
+
+$query = "SELECT count(*) as p FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and o_stat='Confirmed' and order_det.order_cat='Periodic Servicing' )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $rw1=mysql_fetch_array($query_result);
+    $p=$rw1['p'];
+$query = "SELECT count(*) as w FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and o_stat='Confirmed' and order_det.order_cat='Waterwash' )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $rw1=mysql_fetch_array($query_result);
+    $w=$rw1['w'];
+$query = "SELECT count(*) as r FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and o_stat='Confirmed' and order_det.order_cat='Repair' )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $rw1=mysql_fetch_array($query_result);
+    $r=$rw1['r'];
+$query = "SELECT count(*) as i FROM vendor_order INNER JOIN order_det ON order_det.Ven_oid=vendor_order.Ven_Oid where (vendor_order.S_id=$sid and o_stat='Confirmed' and order_det.order_cat='Insurance' )";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $rw1=mysql_fetch_array($query_result);
+    $i=$rw1['i'];
+    
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -240,19 +284,19 @@
                                 <div class="box-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="43" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
+                                            <input type="text" class="knob" value="<?php echo $p;?>" data-skin="tron" readonly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00a65a"/>
                                             <div class="knob-label">Periodic Servicing</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="32" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
+                                            <input type="text" class="knob" value="<?php echo $w;?>" data-skin="tron" readonly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#00c0ef"/>
                                             <div class="knob-label">Water Wash</div>
                                         </div><!-- ./col -->
                                        <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="54" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
+                                            <input type="text" class="knob" value="<?php echo $r;?>" data-skin="tron" readonly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#f56954"/>
                                             <div class="knob-label">Repair/Accidental</div>
                                         </div><!-- ./col -->
                                         <div class="col-md-3 col-sm-6 col-xs-6 text-center">
-                                            <input type="text" class="knob" value="14" data-skin="tron" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
+                                            <input type="text" class="knob" value="<?php echo $i;?>" data-skin="tron" readonly="true" data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#932ab6"/>
                                             <div class="knob-label">Insurance Renewal</div>
                                         </div><!-- ./col -->
 
@@ -568,6 +612,10 @@
 
         </script>
     </body>
+        <?php
+    print "<script>document.getElementById('det_tab').innerHTML='$O_row';</script>";
+    ?>
+
 </html>
 
     
