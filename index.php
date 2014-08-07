@@ -43,9 +43,7 @@ xmlhttp.onreadystatechange=function()
 xmlhttp.open("GET","docs/Service/bikelist.php?company="+company,true);
 xmlhttp.send();
 }
-function checkfield(){
-    if(document.getElementById("ph").i)
-}
+
 
 </script>
 <body>
@@ -121,12 +119,12 @@ function checkfield(){
                                 <form role="form" action ="docs/Service/choice.php" method="POST">
                                     <div class="box-body">
                                         <div class="form-group" style="width:465px">
-                                            <label for="exampleInputPassword1">Your Location<!--Added--><span class="error" id="ph">*</span></label>
-                                            <input type="text" class="form-control" name="area" id="area" placeholder="Start typing your area, eg. Marathahalli">
+                                            <label for="exampleInputPassword1">Your Location<!--Added--><span class="error" >*</span></label>
+                                            <input type="text" class="form-control" onchange="checkfield();" name="area" id="area" placeholder="Start typing your area, eg. Marathahalli">
                                         </div>
                                         <div class="form-group" style="clear:both;float:left;">
                                             <label>Service Category<!--Added--><span class="error" id="scat">*</span></label>
-                                            <select class="form-control" name="servicetype" id="stype">
+                                            <select class="form-control" onchange="checkfield();" name="servicetype" id="stype">
                                                 <option selected="true">--Select--</option>
                                                 <option value="Periodic Servicing">Periodic Servicing</option>
                                                 <option value="Waterwash Service">Waterwash Service</option>
@@ -153,7 +151,7 @@ function checkfield(){
                                     </div>
                                     <div class="form-group" style="float:left;margin-left:20px;">
                                      <label>Bike Model<span class="error" id="bikename">*</span></label>
-                                        <select class="form-control" id="bikediv" name="model">
+                                        <select class="form-control" id="bikediv" onchange="checkfield();" name="model">
                                            <option value="">--Select--</option>
                                              
                                         </select>
@@ -165,13 +163,13 @@ function checkfield(){
                                             $("#series").chained("#mark");
                                         </script>
                                         <div class="form-group" style="clear:both;width:185px;float:left;">
-                                            <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error" id="ph">*</span></label>
-                                            <input type="text" class="form-control" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
+                                            <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error">*</span></label>
+                                            <input type="text" class="form-control" onchange="checkfield();" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
                                         </div>
                                         <div class="form_elem" style="width:465px;">
                                             <label style="margin-left:20px;">Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
                                             <p id="datepairExample">
-                                                <input type="text" style="float:left;width:245px;padding-left:20px;margin-left:20px;text-align:center" class="date start form-control" name="date_" placeholder="eg.:27/07/2014"/>
+                                                <input type="text" onchange="checkfield();" style="float:left;width:245px;padding-left:20px;margin-left:20px;text-align:center" class="date start form-control" id="date_" name="date_" placeholder="eg.:27/07/2014"/>
 <!--                                                 <input type="text" style="float:left;width:157px" class="time start form-control" name="time__" placeholder="11.30 am"/></p>
  -->                                            </div>
                                             <div class="form-group" style="clear:both;width:465px">
@@ -181,7 +179,7 @@ function checkfield(){
                                         </div><!-- /.box-body -->
 
                                         <div class="box-footer">
-                                            <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" name="submit" id="submit" class="btn btn-primary" disabled>Submit</button>
                                         </div>
                                     </form>
                                 </div><!-- /.box -->
@@ -335,6 +333,38 @@ function checkfield(){
         $("#bike_company").chained("#bike_model");
         $("#series").chained("#mark");
         });
+
+
+function checkfield(){
+    var e1 = document.getElementById("area");
+    var e2 = document.getElementById("ph");
+    var e3 = document.getElementById("company");
+    var e4 = document.getElementById("bikediv");
+    var e5 = document.getElementById("stype");
+    var e6 = document.getElementById("date_");
+    var str1 = new Array(6);
+    str1[0]  = e1.value;
+    str1[1]  = e2.value;
+    str1[2]  = e3.options[e3.selectedIndex].text;
+    str1[3]  = e4.options[e4.selectedIndex].text;
+    str1[4]  = e5.options[e5.selectedIndex].text;
+    str1[5]  = e6.value;
+    var x=0;
+    for (i = 0; i < str1.length; i++) { 
+     if(str1[i]=="" || str1[i]=="--Select--" || str1[i]=="undefined"){
+           x=1;
+           
+        }
+    }
+    if(x==0){
+            document.getElementById("submit").disabled = (1==0);
+    }else{
+            document.getElementById("submit").disabled = (1==1);
+    }
+
+}
+
+      
 </script>
 
 

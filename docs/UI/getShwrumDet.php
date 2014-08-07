@@ -4,8 +4,7 @@
 if ($_POST) {
     $shwrum_name = $_POST['shwrum_name'];
     $date_ = $_POST['date'];
-
-    echo "<script>alert('".$date_."');</script>";
+ 
     if ($shwrum_name != '') {
       /* $sql1 = "SELECT ANAME FROM activity WHERE APRJCT= '$prjct_name'";
        $result1 = mysql_query($sql1);*/
