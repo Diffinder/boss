@@ -300,7 +300,30 @@ xmlhttp.send();
                     return false;
                 }
             }
+            });
         });
+    </script>
+    <script src="script/js/jquery-1.10.2.js"></script>
+    <script src="script/js/jquery-ui-1.10.3.min.js"></script>
+    <script type="text/javascript" src="script/js/jquery.timepicker.js"></script>
+
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        var availableTags = [<?php 
+            $query = "SELECT distinct area FROM area";
+            $query_result = mysql_query($query,$con)
+            or die("Invalid query: " . mysql_error());
+            $O_row="\"Halarur\"";
+            while ($rw1=mysql_fetch_array($query_result)) {
+            $O_row.=",\"".$rw1[area]."\"";
+            }
+            echo $O_row;
+
+        ?>];
+        $( "#area" ).autocomplete({
+          source: availableTags
+      });
     });
 </script>
 <script src="script/js/jquery-1.10.2.js"></script>
