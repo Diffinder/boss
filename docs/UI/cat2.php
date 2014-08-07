@@ -10,6 +10,8 @@
         <!-- font Awesome -->
         <link href="../../styles/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="../../styles/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+        <link href="../../styles/css/star-rating.css" rel="stylesheet" type="text/css" />
+        <link href="../../styles/css/jquery.raty.css" rel="stylesheet" type="text/css" />
         <!-- DATA TABLES -->
         <link href="../../styles/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
@@ -183,7 +185,7 @@
                                             <tr>
                                                <th>Select</th>
                                                 <th>Service Provider</th>
-                                                <th>Rating</th>
+                                                <th style="width:12%;">Rating</th>
                                                 <th>Address</th>
                                                 <th>Amenities</th>
                                                 <th>Price</th>
@@ -193,7 +195,7 @@
                                         <tr>
                                                <th><input type="checkbox" name="serType" id="" value="Free"></th>
                                                 <th>Rishi Hero</th>
-                                                <th>Good</th>
+                                                <th><div id="serRating" type="number" class="rating" ></div></th>
                                                 <th>Thubarahalli,Whitefield</th>
                                                 <th>Free PickUp, GoodLife Membership</th>
                                                 <th>1500 INR</th>
@@ -201,7 +203,7 @@
                                              <tr>
                                                <th><input type="checkbox" name="serType" id="" value="Free"></th>
                                                 <th>Kaveri Motors</th>
-                                                <th>Good</th>
+                                                <th><div id="serRating1" type="number" class="rating"></div></th>
                                                 <th>Marathahalli,Whitefield</th>
                                                 <th>Free WaterWash for Next Service</th>
                                                 <th>1700 INR</th>
@@ -294,9 +296,10 @@
         <!-- AdminLTE App -->
         <script src="../../script/js/AdminLTE/app.js" type="text/javascript"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="../../script/js/AdminLTE/demo.js" type="text/javascript"></script>
         <!-- page script -->
          <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
+         <script src="../../script/js/star-rating.js"></script>
+         <script src="../../script/js/jquery.raty.js"></script>
         <script type="text/javascript">
             $(function() {
                 $("#example1").dataTable();
@@ -308,34 +311,15 @@
                     "bInfo": true,
                     "bAutoWidth": false
                 });
-                 var availableTags = [
-            "KARIZMA ZMR",
-                                                        "KARIZMA",
-                                                        "XTREME",
-                                                        "HUNK",
-                                                        "IMPULSE",
-                                                        "ACHIEVER",
-                                                        "IGNITOR",
-                                                        "GLAMOUR PROGRAMMED FI",
-                                                        "GLAMOUR",
-                                                        "SUPER SPLENDOR",
-                                                        "MAESTRO",
-                                                        "PLEASURE",
-                                                        "PASSION XPRO",
-                                                        "PASSION PRO",
-                                                        "SPLENDOR ISMART",
-                                                        "SPLENDOR PRO(BLACK ALLOYS)",
-                                                        "SPLENDOR PRO",
-                                                        "SPLENDOR NXG",
-                                                        "SPLENDOR +",
-                                                        "HF DELUXE ECO",
-                                                        "HF DELUXE",
-                                                        "HF DAWN"
-            ];
-            $( "#tags" ).autocomplete({
-              source: availableTags
-            });
-           
+                // initialize with defaults
+ 
+$('#serRating').raty({
+   score : 1.5,
+   readOnly : true
+});
+$('#serRating1').raty({ score: 3.5,
+   readOnly : true });
+
         });
         </script>
     </body>
