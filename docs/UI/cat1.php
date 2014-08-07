@@ -255,13 +255,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 <div class="box-body" style="clear:both">
                     <div class="form-group">
                         <label for="exampleInputPassword1">Name<span class="error" id="usrn">*</span></label>
-                        <input type="text" class="form-control half-width" name="username" id="exampleInputPassword1" placeholder="Please enter your full name">
+                        <input type="text" class="form-control half-width" name="name" id="exampleInputPassword1" placeholder="Please enter your full name">
                     </div>
                     <div class="form-group"> 
                        <label style="float:left;">Service Type :</label>
-                       <select style="margin-left:10px"class="target">
-                        <option value="option1" >Free</option>
-                        <option value="option2" selected="true">Paid</option>
+                       <select style="margin-left:10px"class="target" name="payment">
+                        <option value="Free" >Free</option>
+                        <option value="Paid" selected="true">Paid</option>
                     </select>
                 </div>
                 <div style="clear:both;font-style:italic;color:#a7a7a7;" >#Select Free service ,only if your bike is new and eligible for free service !!
@@ -274,9 +274,14 @@ google.maps.event.addDomListener(window, 'load', initialize);
                     <label for="exampleInputPassword1">Additional Info</label>
                     <input type="text" class="form-control half-width" name="addInfo" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
                 </div>
+                 <div class="form-group">
+                    <label for="exampleInputPassword1">Address</label>
+                    <input type="text" class="form-control half-width" name="addr" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
+                </div>
+               
                 <div class="checkbox" style="margin-left:0px">
                     <label>
-                        <input type="checkbox" name="pickUp"> Need Home Pick-Up
+                        <input type="checkbox" name="pickup"> Need Home Pick-Up
                     </label>
                 </div>
                 <div class="box-footer">
@@ -379,6 +384,37 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </body>
 </html>
 <?php
+if(isset($_POST['submit'])){
+    print "<script>alert('".$_POST['slot']."');</script>";
+    $tim=time();
+    //post to user table
+
+    $query = "Replace into user values( '".$_POST['name']."','".$_SESSION['area']."','".$tim."','". $_SESSION['mobile']."','".$_SESSION['email']."','".$_POST['addr']."')";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    
+    //post to vendor_order
+    $sid=substr ($_POST['slot'],0,strpos($_POST['slot'],"_"));
+    $exp_apt=substr ($_POST['slot'],strpos($_POST['slot'],"_")+1);
+    $pkp=0;
+    if($_POST['pickup']=='on'){
+        $pkp=1;
+    }
+    $query = "Insert into vendor_order values( '". $_SESSION['mobile']."','".$sid."','".$tim."100','". $_SESSION['mobile']."','".$_SESSION['company']." ".$_SESSION['bike']."','".$_SESSION['date']."','".$exp_apt."',";
+    $query .= "NULL,NULL,'1','Decision Pending','','No Advice!!','','".$_SESSION['area']."','".$pkp."')";   
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+
+
+    //post to order det
+    $query = "Insert into order_det values( '".$tim."','".$tim."100','".$_SESSION['servicetype']."','". $_POST['addInfo']."','".$_POST['reqDetail']."')";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+
+    //update slots
+
+    
+}
 function distance($lat1, $lon1, $lat2, $lon2, $unit) {
 
   $theta = $lon1 - $lon2;
@@ -397,8 +433,7 @@ function distance($lat1, $lon1, $lat2, $lon2, $unit) {
       }
 }
 $dist=3.00;
-$_SESSION['servicetype']='Periodic Servicing';
-$_SESSION['area']='Domlur';
+
 $place=$_SESSION['area'];
        
     $query = "SELECT * FROM area where area='".$place."'";
