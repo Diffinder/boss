@@ -45,7 +45,7 @@ var infowindow = null;
 
 var mapProp = {
   center:mapCenter,
-  zoom:12,
+  zoom:17,
   mapTypeId:google.maps.MapTypeId.ROADMAP
   };
 
@@ -54,7 +54,7 @@ var map=new google.maps.Map(document.getElementById("googleMap")
 
 
 google.maps.event.addListener(marker,'click',function() {
-    map.setZoom(15);
+    map.setZoom(20);
     map.setCenter(marker.getPosition());
     if (infowindow) {
         infowindow.close();
@@ -314,34 +314,6 @@ google.maps.event.addDomListener(window, 'load', initialize);
             "bInfo": true,
             "bAutoWidth": false
         });
-        var availableTags = [
-        "KARIZMA ZMR",
-        "KARIZMA",
-        "XTREME",
-        "HUNK",
-        "IMPULSE",
-        "ACHIEVER",
-        "IGNITOR",
-        "GLAMOUR PROGRAMMED FI",
-        "GLAMOUR",
-        "SUPER SPLENDOR",
-        "MAESTRO",
-        "PLEASURE",
-        "PASSION XPRO",
-        "PASSION PRO",
-        "SPLENDOR ISMART",
-        "SPLENDOR PRO(BLACK ALLOYS)",
-        "SPLENDOR PRO",
-        "SPLENDOR NXG",
-        "SPLENDOR +",
-        "HF DELUXE ECO",
-        "HF DELUXE",
-        "HF DAWN"
-        ];
-        $( "#tags" ).autocomplete({
-          source: availableTags
-      });
-
     });
 </script>
 <script type="text/javascript">
