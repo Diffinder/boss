@@ -188,7 +188,6 @@
                                                 <th style="width:12%;">Rating</th>
                                                 <th>Address</th>
                                                 <th>Amenities</th>
-                                                <th>Price</th>
                                             </tr>
                                         </thead>
                                         <tbody id="det_tab">
@@ -198,7 +197,6 @@
                                                 <th><div id="serRating" type="number" class="rating" ></div></th>
                                                 <th>Thubarahalli,Whitefield</th>
                                                 <th>Free PickUp, GoodLife Membership</th>
-                                                <th>1500 INR</th>
                                             </tr>
                                              <tr>
                                                <th><input type="checkbox" name="serType" id="" value="Free"></th>
@@ -206,7 +204,6 @@
                                                 <th><div id="serRating1" type="number" class="rating"></div></th>
                                                 <th>Marathahalli,Whitefield</th>
                                                 <th>Free WaterWash for Next Service</th>
-                                                <th>1700 INR</th>
                                             </tr>
                                             
                                         </tbody>
@@ -217,7 +214,6 @@
                                                 <th>Rating</th>
                                                 <th>Address</th>
                                                 <th>Amenities</th>
-                                                <th>Price</th>
                                              </tr>
                                         </tfoot>
                                     </table>
@@ -234,13 +230,12 @@
                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
                                               <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
                                             <script type="text/javascript">
-                                            var flag=1;
+                                            var flag = 1;
                                                       $( ".target" ).change(function() {
-                                                        if(flag)
+                                                        if(flag == 1)
                                                         {
                                                             document.getElementById('shwRumTable').style.display="none";
                                                             document.getElementById('emerNote').style.display="block";
-                                                            document.getElementById('date').style.display="none";
                                                             document.getElementById('addInfo').style.display="none";
                                                             document.getElementById('homePick').style.display="none";
                                                             flag=0;
@@ -248,7 +243,6 @@
                                                       else
                                                       {
                                                             document.getElementById('shwRumTable').style.display="block";
-                                                            document.getElementById('date').style.display="block";
                                                             document.getElementById('addInfo').style.display="block";
                                                             document.getElementById('homePick').style.display="block";
                                                             document.getElementById('emerNote').style.display="none";
