@@ -22,6 +22,42 @@ require_once("../../includes/db/connection.php"); ?>
 <body class="skin-blue" style="overflow:hidden">
 <script>
 
+var togg=1;
+function fillgrid(){
+    var x = document.getElementById("nearby");
+    var dist__=50;
+    var area__="Domlur";
+    var servicetype = "<?php echo $_SESSION['servicetype'];?>";
+    var company__="<?php echo $_SESSION['company'];?>";
+    if(togg == 0){
+        dist__=3;
+        togg=1;
+        area__="<?php echo $_SESSION['area'];?>";
+    }
+    else{
+        togg=0;
+    }
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+    xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+        document.getElementById("detail_tab").innerHTML=xmlhttp.responseText;
+        }
+    }
+xmlhttp.open("POST","../Service/fetch_shwrum.php",true);
+xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+xmlhttp.send("dist="+dist__+"&area="+area__+"&company="+company__+"&servicetype="+servicetype);
+}
+
 function showMarker(lat,lon){
       
     var gMarker = null;
@@ -216,7 +252,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                             <div class="box-body table-responsive">
                                <div class="checkbox" style="margin-left:0px">
                                 <label>
-                                    <input type="checkbox" name="pickUp" checked="true">Show only NearBy Service-Centres
+                                    <input type="Button" name="nearby" id="nearby" onclick="fillgrid();">Show only NearBy Service-Centres
                                 </label>
                             </div>
                             <table id="example1" class="table table-bordered table-striped">
@@ -357,7 +393,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 </html>
 <?php
 if(isset($_POST['submit'])){
-    print "<script>alert('".$_POST['slot']."');</script>";
+    
     $tim=time();
     //post to user table
 
