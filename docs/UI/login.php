@@ -52,11 +52,13 @@ session_start();
 </html>
 <?php
 if(isset($_POST['signIN'])){
-
-print '<script type="text/javascript">';
-print 'alert("'.$msg.'")';
-print '</script>'; 
-
+    $query = "SELECT pwd FROM user where mobile='".$_POST['userid']."'";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+   $rw1 = mysql_fetch_array($query_result);
+   if(rw1['pwd']==$_POST['userid']){
+    echo '<script type="text/javascript"> window.location.href = "http://localhost/boss/docs/UI/cat3.php";</script>';
+   }
 
 }
 ?>
