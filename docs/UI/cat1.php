@@ -276,9 +276,15 @@ google.maps.event.addDomListener(window, 'load', initialize);
                 </div>
                  <div class="form-group">
                     <label for="exampleInputPassword1">Address</label>
-                    <input type="text" class="form-control half-width" name="addr" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
-                </div>
-               
+                    <textarea class="form-control half-width" name="addr" id="exampleInputPassword1" placeholder="Any other Info you would  like to share..."> </textarea>
+                </div><div class="form-group" style="">
+                                        <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error">*</span></label>
+                                        <input type="text" class="form-control half-width" onchange="" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
+                                    </div>
+                                <div class="form-group" style="">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" name="email" style="" class="form-control half-width" id="email" onchange="checkfield();" placeholder="Enter Your Valid  email">
+                                </div>
                 <div class="checkbox" style="margin-left:0px">
                     <label>
                         <input type="checkbox" name="pickup"> Need Home Pick-Up
