@@ -17,6 +17,8 @@
         <!-- Theme style -->
         <link href="../../styles/css/AdminLTE.css" rel="stylesheet" type="text/css" />
             <link rel="stylesheet" href="../../styles/css/jQueryUI/jquery-ui.css">
+            <link href="../../styles/css/bootstrap-switch.css" rel="stylesheet">
+
     </head>
     <body class="skin-blue" style="overflow:hidden">
         <!-- header logo: style can be found in header.less -->
@@ -165,7 +167,7 @@
                                 </div><!-- /.box-header -->
                                 <div class="form-group" style="margin-left:15px"> 
                                          <label >Service Type :</label>
-                                            <select style="margin-left:10px"class="target" id="ser">
+                                            <select style="margin-left:5px"class="target" id="ser">
                                                 <option value="option1" selected="selected">Normal</option>
                                                 <option value="option2">Emergency</option>
                                               </select>
@@ -174,12 +176,13 @@
                                         </div>
                                         <div style="clear:both;font-style:italic;color:rgb(143, 63, 63);;display:none;margin-left:15px" id="emerNote" >#Emergency service is available only from 9am to 9pm!!
                                         </div>
+                                    
+                                           <div class="btn-group btn-toggle form-group" style="margin-left:10px;margin-top:15px;"> 
+                                            <button class="btn btn-xs btn-default active">Near By</button>
+                                            <button class="btn btn-xs btn-primary ">View All</button>
+                                            </div>
                                 <div class="box-body table-responsive" id="shwRumTable">
-                                <div class="checkbox" style="margin-left:0px">
-                                            <label>
-                                                <input type="checkbox" id="shwCheck" name="pickUp">Show only NearBy Service-Centres
-                                            </label>
-                                        </div>
+                             
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
@@ -293,7 +296,9 @@
          <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
          <script src="../../script/js/star-rating.js"></script>
          <script src="../../script/js/jquery.raty.js"></script>
+         <script src="../../script/js/bootstrap-switch.js"></script>
         <script type="text/javascript">
+       
             $(function() {
                 $("#example1").dataTable();
                 $('#example2').dataTable({
@@ -304,8 +309,27 @@
                     "bInfo": true,
                     "bAutoWidth": false
                 });
-                // initialize with defaults
-   
+           $('.btn-toggle').click(function() {
+    $(this).find('.btn').toggleClass('active');  
+    
+    if ($(this).find('.btn-primary').size()>0) {
+        $(this).find('.btn').toggleClass('btn-primary');
+    }
+    if ($(this).find('.btn-danger').size()>0) {
+        $(this).find('.btn').toggleClass('btn-danger');
+    }
+    if ($(this).find('.btn-success').size()>0) {
+        $(this).find('.btn').toggleClass('btn-success');
+    }
+    if ($(this).find('.btn-info').size()>0) {
+        $(this).find('.btn').toggleClass('btn-info');
+    }
+    
+    $(this).find('.btn').toggleClass('btn-default');
+       
+});
+
+           $("[name='my-checkbox']").bootstrapSwitch();
 $('#serRating').raty({
    score : 1.5,
    readOnly : true
