@@ -315,7 +315,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
                     <textarea class="form-control half-width" name="addr" id="exampleInputPassword1" placeholder="Any other Info you would  like to share..."> </textarea>
                 </div><div class="form-group" style="">
                                         <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error">*</span></label>
-                                        <input type="text" class="form-control half-width" onchange="" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
+                                        <input type="text" class="form-control half-width" name="phnum" id="ph" placeholder="10 Digit Mobile Number">
                                     </div>
                                 <div class="form-group" style="">
                                     <label for="exampleInputEmail1">Email address</label>
@@ -363,6 +363,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         });
     });
 </script>
+<script type="text/javascript" src="date.js"></script>
 <script type="text/javascript">
     function shwSlots(id){
         if(document.getElementById("shwRum_buk_slots").style.display == "block")
@@ -374,13 +375,17 @@ google.maps.event.addDomListener(window, 'load', initialize);
             var shwrum_name = id;
             var index = id.indexOf("_");
             var sname = id.substring(0,index);
-            var dt="<?php echo $_SESSION["date"]; ?>";
+            var dt=Date.parse("<?php echo $_SESSION['date']; ?>");
             lat_lon = id.substring(index+1,id.length);
             lat_lon_index = lat_lon.indexOf("_");
             lat = lat_lon.substring(0,lat_lon_index);
             lon = lat_lon.substring(lat_lon_index+1,lat_lon.length);
-            var dataString = 'shwrum_name='+sname+'&date='+dt ;
-            $.ajax({
+            var p = dt.toString('yyyy/MM/dd');
+            alert(p);
+            var dataString = 'shwrum_name='+sname+'&date='+p ;
+            
+           
+           $.ajax({
                 type: "POST",
                 url: "getShwrumDet.php", // Name of the php files
                 data: dataString,
@@ -403,7 +408,7 @@ if(isset($_POST['submit'])){
     $tim=time();
     //post to user table
 
-    $query = "Replace into user values( '".$_POST['name']."','".$_SESSION['area']."','".$tim."','". $_SESSION['mobile']."','".$_SESSION['email']."','".$_POST['addr']."')";
+    $query = "Replace into user values( '".$_POST['name']."','".$_SESSION['area']."','".$tim."','". $_POST['phnum']."','".$_POST['email']."','".$_POST['addr']."')";
     $query_result = mysql_query($query,$con)
     or die("Invalid query: " . mysql_error());
     
@@ -414,7 +419,7 @@ if(isset($_POST['submit'])){
     if($_POST['pickup']=='on'){
         $pkp=1;
     }
-    $query = "Insert into vendor_order values( '". $_SESSION['mobile']."','".$sid."','".$tim."100','". $_SESSION['mobile']."','".$_SESSION['company']." ".$_SESSION['bike']."','".$_SESSION['date']."','".$exp_apt."',";
+    $query = "Insert into vendor_order values( '". $_POST['phnum']."','".$sid."','".$tim."100','". $_POST['phnum']."','".$_SESSION['company']." ".$_SESSION['bike']."','".$_SESSION['date']."','".$exp_apt."',";
     $query .= "NULL,NULL,'1','Decision Pending','','No Advice!!','','".$_SESSION['area']."','".$pkp."')";   
     $query_result = mysql_query($query,$con)
     or die("Invalid query: " . mysql_error());
