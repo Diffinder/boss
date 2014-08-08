@@ -85,10 +85,10 @@
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="login.php" class="btn btn-default btn-flat">Login</a><!-- Changed -->
+                                        <a href="login.php" class="btn btn-default btn-flat">Logout</a><!-- Changed -->
                                     </div>
                                     <div class="pull-right">
-                                        <a href="register.php" class="btn btn-default btn-flat">Register</a><!-- Changed -->
+                                        <a href="edit_profile.php" class="btn btn-default btn-flat">Profile</a><!-- Changed -->
                                     </div>
                                 </li>
                             </ul>
@@ -108,7 +108,7 @@
                             <img src="../../styles/img/avatar3.png" class="img-circle" alt="User Image" />
                         </div>
                         <div class="pull-left info">
-                            <p>Hello, Guest</p>
+                            <p>Hello, User</p>
 
                             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                         </div>
@@ -116,24 +116,29 @@
                     <!-- /.search form -->
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                      <ul class="sidebar-menu">
-                        <li class="active">
-                            <a href="index.php">
-                                <i class="fa fa-dashboard"></i> <span>Order</span>
+                       <li class="active">
+                            <a href="uorder.php">
+                                <i class="fa fa-dashboard"></i> <span>New Order</span>
+                            </a>
+                        </li>
+                         <li  >
+                            <a href="track.php">
+                                <i class="fa fa-magnet"></i> <span>Order Status</span>
                             </a>
                         </li>
                         <li>
-                            <a href="contact.php" target="_blank"><!-- Changed -->
+                            <a href="contact.php" target="_blank">
                                 <i class="fa fa-envelope"></i> <span>Contact Us</span>
                             </a>
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-user"></i> <span>Register/Login</span>
+                                <i class="fa fa-user"></i> <span>Profile</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="login.php"><i class="fa fa-angle-double-right"></i> Login</a></li><!-- Changed -->
-                                <li><a href="register.php"><i class="fa fa-angle-double-right"></i> Register</a></li><!-- Changed -->
+                                <li><a href="feedback.php" target="_blank"><i class="fa fa-angle-double-right"></i> Feedback</a></li>
+                                <li><a href="edit_profile.php"><i class="fa fa-angle-double-right"></i>Edit Profile</a></li>
                             </ul>
                         </li>
                     </ul>

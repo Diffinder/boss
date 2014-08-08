@@ -177,7 +177,7 @@
                                 <div class="box-body table-responsive" id="shwRumTable">
                                 <div class="checkbox" style="margin-left:0px">
                                             <label>
-                                                <input type="checkbox" name="pickUp" checked="true">Show only NearBy Service-Centres
+                                                <input type="checkbox" id="shwCheck" name="pickUp">Show only NearBy Service-Centres
                                             </label>
                                         </div>
                                     <table id="example1" class="table table-bordered table-striped">
@@ -223,13 +223,12 @@
                                             <label for="exampleInputPassword1">Name<span class="error" id="usrn">*</span></label>
                                             <input type="text" class="form-control half-width" name="username" id="exampleInputPassword1" placeholder="Please enter your full name">
                                         </div>
-                                 
-
-                                        
-                                   
                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
                                               <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
                                             <script type="text/javascript">
+                                             $('#shwCheck').change(function () {
+                                                alert('changed');
+                                             });
                                             var flag = 1;
                                                       $( ".target" ).change(function() {
                                                         if(flag == 1)
@@ -306,7 +305,7 @@
                     "bAutoWidth": false
                 });
                 // initialize with defaults
- 
+   
 $('#serRating').raty({
    score : 1.5,
    readOnly : true
