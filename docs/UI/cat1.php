@@ -471,7 +471,7 @@ $place=$_SESSION['area'];
             $areas = $areas.",'".$rw1['area']."'";
         }
     }
-    $queryx = "SELECT * FROM serv_center where area in (".$areas.")";
+    $queryx = "SELECT * FROM serv_center where area in (".$areas.") AND company='".$_SESSION['company']."'";
     $queryx_result = mysql_query($queryx,$con)
     or die("Invalid query: " . mysql_error());
     while ($rw1 = mysql_fetch_array($queryx_result)) {

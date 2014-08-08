@@ -1,4 +1,5 @@
-
+<?php   session_start(); 
+require_once("../../includes/db/connection.php"); ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -191,20 +192,6 @@
                                             </tr>
                                         </thead>
                                         <tbody id="det_tab">
-                                        <tr>
-                                               <th><input type="checkbox" name="serType" id="" value="Free"></th>
-                                                <th>Rishi Hero</th>
-                                                <th><div id="serRating" type="number" class="rating" ></div></th>
-                                                <th>Thubarahalli,Whitefield</th>
-                                                <th>Free PickUp, GoodLife Membership</th>
-                                            </tr>
-                                             <tr>
-                                               <th><input type="checkbox" name="serType" id="" value="Free"></th>
-                                                <th>Kaveri Motors</th>
-                                                <th><div id="serRating1" type="number" class="rating"></div></th>
-                                                <th>Marathahalli,Whitefield</th>
-                                                <th>Free WaterWash for Next Service</th>
-                                            </tr>
                                             
                                         </tbody>
                                         <tfoot>
@@ -221,7 +208,7 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                             <label for="exampleInputPassword1">Name<span class="error" id="usrn">*</span></label>
-                                            <input type="text" class="form-control half-width" name="username" id="exampleInputPassword1" placeholder="Please enter your full name">
+                                            <input type="text" class="form-control half-width" name="name" id="exampleInputPassword1" placeholder="Please enter your full name">
                                         </div>
                                         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
                                               <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
@@ -258,8 +245,15 @@
                                     
                                         <div class="form-group" id="addInfo">
                                             <label for="exampleInputPassword1">Additional Info</label>
-                                            <input type="text" class="form-control half-width" name="addInfo" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
+                                            <input type="text" class="form-control half-width" name="addr" id="exampleInputPassword1" placeholder="Any other Info you would  like to share...">
                                         </div>
+                                         <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error">*</span></label>
+                                        <input type="text" class="form-control half-width" name="phnum" id="ph" placeholder="10 Digit Mobile Number">
+                                    </div>
+                                <div class="form-group" style="">
+                                    <label for="exampleInputEmail1">Email address</label>
+                                    <input type="email" name="email" style="" class="form-control half-width" id="email" onchange="checkfield();" placeholder="Enter Your Valid  email">
+                                </div>
                                         <div class="checkbox" style="margin-left:0px"    id="homePick">
                                             <label>
                                                 <input type="checkbox" name="pickUp"> Need Home Pick-Up
@@ -293,6 +287,77 @@
          <script src="../../script/js/jquery-ui-1.10.3.min.js"></script>
          <script src="../../script/js/star-rating.js"></script>
          <script src="../../script/js/jquery.raty.js"></script>
+
+<?php
+function distance($lat1, $lon1, $lat2, $lon2, $unit) {
+
+  $theta = $lon1 - $lon2;
+  $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+  $dist = acos($dist);
+  $dist = rad2deg($dist);
+  $miles = $dist * 60 * 1.1515;
+  $unit = strtoupper($unit);
+
+  if ($unit == "K") {
+    return ($miles * 1.609344);
+  } else if ($unit == "N") {
+      return ($miles * 0.8684);
+    } else {
+        return $miles;
+      }
+}
+$dist=3.00;
+
+$place=$_SESSION['area'];
+       
+    $query = "SELECT * FROM area where area='".$place."'";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    $query2 = "SELECT * FROM area";
+    $query_result2 = mysql_query($query2,$con)
+    or die("Invalid query: " . mysql_error());
+    $O_row=" ";
+   
+   
+    $src=mysql_fetch_array($query_result);
+    $areas="'".$src['area']."'";
+    while ($rw1 = mysql_fetch_array($query_result2)) {
+          if(distance($src['lati'],$src['longi'],$rw1['lati'],$rw1['longi'])<$dist and $src['area']!=$rw1['area']){
+            $areas = $areas.",'".$rw1['area']."'";
+        }
+    }
+    $queryx = "SELECT * FROM serv_center where area in (".$areas.") ";
+    $queryx_result = mysql_query($queryx,$con)
+    or die("Invalid query: " . mysql_error());
+    
+    while ($rw1 = mysql_fetch_array($queryx_result)) {
+
+
+
+        $query = "SELECT amenity,description FROM Amenities where S_id='".$rw1[S_id]."'";         
+        $query_result = mysql_query($query,$con)
+        or die("Invalid query: " . mysql_error());         $amnty="";
+        while($amm = mysql_fetch_array($query_result)){
+        $amnty.=$amm['amenity']." - ".$amm['description'].", ";         
+        }
+
+        
+
+        $O_row.="<tr>";
+        $O_row.='<th><input type="checkbox" name="chk_$sid" id="chk_$sid" ></th>';
+        $O_row.="<td>$rw1[S_name]</td>";
+        $O_row.='<th><div id="r_'.$rw1[S_id].'" type="number" class="rating" ></div></th>';
+        $O_row.="<td>$rw1[address]</td>";
+        $O_row.="<td>".$amnty."</td>";
+        $O_row.="</tr>";
+        
+     }
+
+
+print "<script>document.getElementById('det_tab').innerHTML=document.getElementById('det_tab').innerHTML+'".$O_row."';</script>";
+?>
+<?php
+$text=<<<EOT
         <script type="text/javascript">
             $(function() {
                 $("#example1").dataTable();
@@ -305,7 +370,29 @@
                     "bAutoWidth": false
                 });
                 // initialize with defaults
-   
+$( document ).ready(function() {
+    console.log( "ready!" );
+
+EOT;
+   $queryx = "SELECT * FROM serv_center where area in (".$areas.")";
+    $queryx_result = mysql_query($queryx,$con)
+    or die("Invalid query: " . mysql_error());
+    
+    while ($rw1 = mysql_fetch_array($queryx_result)) {
+
+        $query = "SELECT (rate_1*1+rate_2*2+rate_3*3+rate_4*4+rate_5*5)/(rate_1+rate_2+rate_3+rate_4+rate_5) as rate FROM rating where S_id='".$rw1[S_id]."'";
+        $query_result = mysql_query($query,$con)
+        or die("Invalid query: " . mysql_error());
+        $qual = mysql_fetch_array($query_result);
+        $q=$qual['rate'];
+        $text.= "\n$('#r_".$rw1[S_id]."').raty({\n";
+        $text.= "score : ".$q.",\n";
+        $text.= "readOnly : true\n";
+        $text.= "});\n";
+
+
+    }
+$text.=<<<eod
 $('#serRating').raty({
    score : 1.5,
    readOnly : true
@@ -314,7 +401,42 @@ $('#serRating1').raty({ score: 3.5,
    readOnly : true });
 
         });
+});
         </script>
+eod;
+echo $text;
+?>
+<?php
+if(isset($_POST['submit'])){
+    
+    $tim=time();
+    //post to user table
+
+    $query = "Replace into user values( '".$_POST['name']."','".$_SESSION['area']."','".$tim."','". $_POST['phnum']."','".$_POST['email']."','".$_POST['addr']."')";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+    
+    //post to vendor_order
+    
+    $query = "Insert into vendor_order values( '". $_POST['phnum']."','".$sid."','".$tim."100','". $_POST['phnum']."','".$_SESSION['company']." ".$_SESSION['bike']."','".$_SESSION['date']."','".$exp_apt."',";
+    $query .= "NULL,NULL,'1','Decision Pending','','No Advice!!','','".$_SESSION['area']."','".$pkp."')";   
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+
+
+    //post to order det
+    $query = "Insert into order_det values( '".$tim."','".$tim."100','".$_SESSION['servicetype']."','". $_POST['addInfo']."','".$_POST['reqDetail']."')";
+    $query_result = mysql_query($query,$con)
+    or die("Invalid query: " . mysql_error());
+
+    //update slots
+
+    
+}
+
+?>
+
+
     </body>
 </html>
 
