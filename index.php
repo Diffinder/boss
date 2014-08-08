@@ -114,13 +114,13 @@ xmlhttp.send();
                             <!-- form start -->
                             <form role="form" action ="docs/Service/choice.php" method="POST">
                                 <div class="box-body">               
-                                    <div class="col-xs-6 " >
+                                    <div class="col-xs-12" >
                                         <div class="form-group" style="">
                                             <label for="exampleInputPassword1">Your Location<!--Added--><span class="error" >*</span></label>
                                             <input type="text" class="form-control" onchange="checkfield();" name="area" id="area" placeholder="Start typing your area, eg. Domlur">
                                         </div>
                                     </div>
-                                    <div class="col-xs-6 " >
+                                    <div class="col-xs-6" >
                                         <div class="form-group" style="">
                                             <label>Service Category<!--Added--><span class="error" id="scat">*</span></label>
                                             <select class="form-control" onchange="checkfield();" name="servicetype" id="stype">
@@ -130,120 +130,106 @@ xmlhttp.send();
                                                 <option value="Repair">Repair</option>
                                                 <option value="Accidental">Accidental</option>
                                                 <option value="Puncture">Puncture</option>
-                                                <option value="Insurance Renewal">Insurance Renewal</option>
-                                                <option value="Accessories/Spairs">Accessories/Spairs</option>
+                                                <option value="Insurance Renewal">Request for Insurance Renewal</option>
+                                                <option value="Accessories/Spairs">Accessories/Spares</option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xs-6 " >
-                                        <div class="form-group" style="clear:both;">
-                                           <label>Bike Company<span class="error" id="scat">*</span></label>
-                                           <select class="form-control" id="company" name="company" onchange="bikelist(this.value)">
-                                               <option value="">--Select--</option>
-                                               <option value="Bajaj">Bajaj</option>
-                                               <option value="Hero">Hero</option>
-                                               <option value="Honda">Honda</option>
-                                               <option value="TVS" >TVS</option>
-                                               <option value="Enfield" >Royal Enfield</option>
-                                               <option value="Yamaha" >Yamaha</option>
-                                               <option value="Suzuki" >Suzuki</option>
-                                               <option value="KTM" >KTM</option>
-                                           </select>
-                                       </div>
-                                   </div>
-                                   <div class="col-xs-6 " >
 
-                                    <div class="form-group" style="">
-                                       <label>Bike Model<span class="error" id="bikename">*</span></label>
-                                       <select class="form-control" id="bikediv" onchange="checkfield();" name="model">
+                                    <div class="col-xs-6" >
+                                        <div class="form-group" style="">
+                                            <label style="">Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
+                                            <p id="datepairExample">
+                                                <input type="text" onchange="checkfield();" style="" class="date start form-control" id="date_" name="date_" placeholder="eg.:27/07/2014"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 " >
+                                            <div class="form-group" style="">
+                                             <label>Bike Company<span class="error" id="scat">*</span></label>
+                                             <select class="form-control" id="company" name="company" onchange="bikelist(this.value)">
+                                                 <option value="">--Select--</option>
+                                                 <option value="Bajaj">Bajaj</option>
+                                                 <option value="Hero">Hero</option>
+                                                 <option value="Honda">Honda</option>
+                                                 <option value="TVS" >TVS</option>
+                                                 <option value="Enfield" >Royal Enfield</option>
+                                                 <option value="Yamaha" >Yamaha</option>
+                                                 <option value="Suzuki" >Suzuki</option>
+                                                 <option value="KTM" >KTM</option>
+                                             </select>
+                                         </div>
+                                     </div>
+                                     <div class="col-xs-6 " >
+                                        <div class="form-group" style="">
+                                         <label>Bike Model<span class="error" id="bikename">*</span></label>
+                                         <select class="form-control" id="bikediv" onchange="checkfield();" name="model">
                                          <option value="">--Select--</option>
-
-                                     </select>
-                                 </div>
-                                 </div>
-                                 <div class="col-xs-6 " >
-                                    <div class="form-group" style="">
-                                        <label for="exampleInputPassword1">Mobile Number<!--Added--><span class="error">*</span></label>
-                                        <input type="text" class="form-control" onchange="checkfield();" name="phNum" id="ph" placeholder="10 Digit Mobile Number">
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 " >
-                                    <div class="form_elem" style="">
-                                        <label style="">Appointment Date&nbsp;<span class="error" id="adt">*</span></label>
-                                        <p id="datepairExample">
-                                            <input type="text" onchange="checkfield();" style="" class="date start form-control" id="date_" name="date_" placeholder="eg.:27/07/2014"/>
-                        </div>
-                                </div>                                      
-                                <div class="col-xs-12" >
-
-                                <div class="form-group" style="">
-                                    <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" name="email" style="" class="form-control" id="email" onchange="checkfield();" placeholder="Enter Your Valid  email">
-                                </div>
-                                </div>
-                                <div class="col-xs-12" >
-                                    <div class="box-footer">
-                                        <button type="submit" name="submit" id="submit" class="btn btn-primary" disabled>Submit</button>
-                                    </div>
-                                </form>
-                                </div><!-- /.box -->
-                            </div>
-
-                            </div>
-                            </div>
-                    <div class="col-md-6" style="padding-left:80px"></br>
-                     <div class="box box-primary">
-                      <div class="box box-solid">
-                        <div class="box-body">
-                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                                <ol class="carousel-indicators">
-                                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
-                                    <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
-                                </ol>
-                                <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src="styles/img/hero_cover.png" alt="First slide"  style="width:600px;height:350px;"><!-- Changed -->
-                                        <div class="carousel-caption">
-                                            <h4 style="color: #Fff;">Welcome</h4><!-- Changed -->
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <img src="styles/img/goodlife.jpg" alt="Second slide" style="width:600px;height:350px;"><!-- Changed -->
-                                        <div class="carousel-caption">
-                                            <h4 style="color: #Fff;">Hero's GoodLife</h4><!-- Changed -->
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <img src="styles/img/hero_latest3.jpg" alt="Third slide" style="width:600px;height:350px;"><!-- Changed -->
-                                        <div class="carousel-caption">
-                                           <h4 style="color: #Fff;"> What's New ?</h4><!-- Changed -->
-                                       </div>
-                                   </div>
-                                   <div class="item">
-                                    <img src="styles/img/hero_cover1.jpg" alt="Third slide" style="width:600px;height:350px;"><!-- Changed -->
-                                    <div class="carousel-caption">
-                                       <h4 style="color: #Fff;"> What's New ?</h4><!-- Changed -->
+                                       </select>
                                    </div>
                                </div>
-                           </div>
-                           <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
+                               <div class="col-xs-12" >
+                                <div class="box-footer">
+                                    <button type="submit" name="submit" id="submit" class="btn btn-primary" disabled>Submit</button>
+                                </div>
+                            </form>
+                        </div><!-- /.box -->
                     </div>
-                    </div><!-- /.box-body -->
-                    </div><!-- /.box -->
-                    <!-- Info box -->
-                    </div><!-- /.box-body -->
-                    </div><!-- /.box -->
-                    </div><!--/.col (right) -->
-                    </div>
-                    </div>
-                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left:80px"></br>
+               <div class="box box-primary">
+                  <div class="box box-solid">
+                    <div class="box-body">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img src="styles/img/hero_cover.png" alt="First slide"  style="width:600px;height:350px;"><!-- Changed -->
+                                    <div class="carousel-caption">
+                                        <h4 style="color: #Fff;">Welcome</h4><!-- Changed -->
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="styles/img/goodlife.jpg" alt="Second slide" style="width:600px;height:350px;"><!-- Changed -->
+                                    <div class="carousel-caption">
+                                        <h4 style="color: #Fff;">Hero's GoodLife</h4><!-- Changed -->
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <img src="styles/img/hero_latest3.jpg" alt="Third slide" style="width:600px;height:350px;"><!-- Changed -->
+                                    <div class="carousel-caption">
+                                     <h4 style="color: #Fff;"> What's New ?</h4><!-- Changed -->
+                                 </div>
+                             </div>
+                             <div class="item">
+                                <img src="styles/img/hero_cover1.jpg" alt="Third slide" style="width:600px;height:350px;"><!-- Changed -->
+                                <div class="carousel-caption">
+                                 <h4 style="color: #Fff;"> What's New ?</h4><!-- Changed -->
+                             </div>
+                         </div>
+                     </div>
+                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+        <!-- Info box -->
+    </div><!-- /.box-body -->
+</div><!-- /.box -->
+</div><!--/.col (right) -->
+</div>
+</div>
+</div>
 <!-- /Services -->
 
 <!-- Callout -->
@@ -356,12 +342,12 @@ while ($rw1=mysql_fetch_array($query_result)) {
     str1[5]  = e6.value;
     var x=0;
     for (i = 0; i < str1.length; i++) { 
-       if(str1[i]=="" || str1[i]=="--Select--" || str1[i]=="undefined"){
-         x=1;
+     if(str1[i]=="" || str1[i]=="--Select--" || str1[i]=="undefined"){
+       x=1;
 
-     }
- }
- if(x==0){
+   }
+}
+if(x==0){
     document.getElementById("submit").disabled = (1==0);
 }else{
     document.getElementById("submit").disabled = (1==1);
